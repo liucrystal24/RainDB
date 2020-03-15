@@ -1,27 +1,18 @@
 <template>
   <div id="app">
-    <header>江苏水利巡测在线平台</header>
+    <header>人工增雨随机化试验样本数据库</header>
     <div class="headernav">
       <div class="navcontent">
-        <router-link :to="{name:'n1c1'}" class="nava">导航1</router-link>
+        <router-link :to="{name:'n1c1'}" class="nava">福建省</router-link>
       </div>
       <div class="navcontent">
-        <router-link :to="{name:'n2c1'}" class="nava">导航2</router-link>
+        <router-link :to="{name:'n2c1'}" class="nava">海南省</router-link>
       </div>
       <div class="navcontent">
-        <router-link :to="{name:'child3'}" class="nava">导航3</router-link>
+        <router-link :to="{name:'child3'}" class="nava">吉林省</router-link>
       </div>
       <div class="navcontent">
-        <router-link :to="{name:'child4'}" class="nava">导航4</router-link>
-      </div>
-      <div class="navcontent">
-        <router-link :to="{name:'child5'}" class="nava">导航5</router-link>
-      </div>
-      <div class="navcontent">
-        <router-link :to="{name:'child6'}" class="nava">导航6</router-link>
-      </div>
-      <div class="navcontent">
-        <router-link :to="{name:'child7'}" class="nava">导航7</router-link>
+        <router-link :to="{name:'child4'}" class="nava">山东省</router-link>
       </div>
     </div>
     <router-view class="navchildren" />
@@ -58,7 +49,7 @@ header {
 }
 .navcontent {
   float: left;
-  width: 14.285%;
+  width: 25%;
   height: 100%;
   line-height: 80px;
 }
@@ -67,6 +58,7 @@ header {
   width: 100%;
   display: block;
   text-decoration: none;
+  /* background-color: cyan; */
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

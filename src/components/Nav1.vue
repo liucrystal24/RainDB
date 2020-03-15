@@ -2,13 +2,16 @@
   <div class="hello">
     <div class="leftnav">
       <div>
-        <router-link :to="{name:'n1c1'}">child1</router-link>
+        <router-link :to="{ name: 'n1c1' }">雷达</router-link>
       </div>
       <div>
-        <router-link :to="{name:'n1c2'}">child2</router-link>
+        <router-link :to="{ name: 'n1c2' }">探空</router-link>
       </div>
       <div>
-        <router-link :to="{name:'n1c3'}">child3</router-link>
+        <router-link :to="{ name: 'n1c3' }">雨滴谱</router-link>
+      </div>
+      <div>
+        <router-link :to="{ name: 'n1c4' }">自动站</router-link>
       </div>
     </div>
     <router-view class="rightchild"></router-view>
@@ -55,6 +58,9 @@ a {
   float: left;
 }
 .rightchild {
-  float: left;
+  width: 100%;
+  padding-left:140px;
+  box-sizing: border-box;
+  height: 100%;
 }
 </style>

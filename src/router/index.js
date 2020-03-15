@@ -6,6 +6,7 @@ import Nav2 from '@/components/Nav2'
 import N1C1 from '@/components/N1C1'
 import N1C2 from '@/components/N1C2'
 import N1C3 from '@/components/N1C3'
+import N1C4 from '@/components/N1C4'
 
 import N2C1 from '@/components/N2C1'
 import N2C2 from '@/components/N2C2'
@@ -18,9 +19,9 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path:'/',
-      name:'index',
-      redirect:'/nav1/n1c1'
+      path: '/',
+      name: 'index',
+      redirect: '/nav1/n1c1'
     },
     {
       path: '/nav1',
@@ -39,6 +40,10 @@ export default new Router({
           path: 'n1c3',
           name: 'n1c3',
           component: N1C3,
+        },{
+          path: 'n1c4',
+          name: 'n1c4',
+          component: N1C4,
         }
       ]
     },
