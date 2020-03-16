@@ -3,17 +3,35 @@
     class="bm-view"
     :center="center"
     :zoom="zoom"
+    :scroll-wheel-zoom="false"
+    :mapStyle="mapStyle"
     @mousemove="syncPolyline"
     @click="paintPolyline"
     @rightclick="newPolyline"
     @ready="handler"
   >
-    <!-- 按钮插件 -->
+    <bm-copyright
+      anchor="BMAP_ANCHOR_BOTTOM_RIGHT"
+      :copyright="[{id: 1, content: '南京云卫通软件技术有限公司'}]"
+    ></bm-copyright>
+    <!-- 按钮插件 bm-control-->
     <bm-control>
       <button @click="toggle('polyline')">{{ polyline.editing ? '停止绘制' : '开始绘制' }}</button>
+      <button>123</button>
     </bm-control>
+
     <!-- 画折线线查件组，只需要在polyline.paths加入经纬度数组，即可 -->
-    <bm-polyline :path="path" v-for="path of polyline.paths" :key="path.index"></bm-polyline>
+    <bm-polyline
+      :path="path"
+      v-for="path of polyline.paths"
+      :key="path.index"
+      stroke-color="#42F942"
+    ></bm-polyline>
+    <bm-polyline :path="recPath1" stroke-color="#0303FF"></bm-polyline>
+    <bm-polyline :path="recPath2" stroke-color="#0303FF"></bm-polyline>
+    <bm-polyline :path="recPath3" stroke-color="#0303FF"></bm-polyline>
+    <bm-polyline :path="recPath4" stroke-color="#FF02FF"></bm-polyline>
+    <bm-polyline :path="recPath5" stroke-color="#FF0000"></bm-polyline>
   </baidu-map>
 </template>
 
@@ -24,30 +42,68 @@ export default {
     return {
       center: { lng: 119.29035, lat: 26.1039 },
       zoom: 9,
-      // BMap: {},
-      // map: {},
+      mapStyle: {
+        styleJson: [
+          {
+            featureType: "road",
+            elementType: "all",
+            stylers: {
+              visibility: "off"
+            }
+          },
+          {
+            featureType: "city",
+            elementType: "labels",
+            stylers: {
+              visibility: "on"
+            }
+          }
+        ]
+      },
+      recPath1: [
+        { lng: 117.974005, lat: 26.776609 },
+        { lng: 118.199372, lat: 26.530698 },
+        { lng: 118.709897, lat: 26.91895 },
+        { lng: 118.48453, lat: 27.137265 },
+        { lng: 117.974005, lat: 26.776609 }
+      ],
+      recPath2: [
+        { lng: 118.086689, lat: 26.359901 },
+        { lng: 118.48913, lat: 26.657853 },
+        { lng: 118.705298, lat: 26.453095 },
+        { lng: 118.256864, lat: 26.102707 },
+        { lng: 118.086689, lat: 26.359901 }
+      ],
+      recPath3: [
+        { lng: 118.744392, lat: 26.337109 },
+        { lng: 118.969759, lat: 26.092324 },
+        { lng: 119.376799, lat: 26.446884 },
+        { lng: 119.128436, lat: 26.661986 },
+        { lng: 118.748991, lat: 26.339181 }
+      ],
+      recPath4: [
+        { lng: 118.433938, lat: 26.860179 },
+        { lng: 118.905368, lat: 26.357829 },
+        { lng: 119.080143, lat: 26.51932 },
+        { lng: 118.583416, lat: 26.985931 },
+        { lng: 118.436237, lat: 26.864304 }
+      ],
+      recPath5: [
+        { lng: 118.822581, lat: 26.948839 },
+        { lng: 119.041048, lat: 26.738414 },
+        { lng: 119.353803, lat: 27.027131 },
+        { lng: 119.112338, lat: 27.226732 },
+        { lng: 118.822581, lat: 26.948839 }
+      ],
       polyline: {
         editing: false,
         paths: [
           [
-            { lng: 116.752121, lat: 26.981295 },
-            { lng: 115.850653, lat: 26.112569 },
-            { lng: 117.612194, lat: 25.883953 },
-            { lng: 116.75672, lat: 26.993657 }
-          ],
-          [
-            { lng: 117.865157, lat: 27.100736 },
-            { lng: 117.91115, lat: 26.299283 },
-            { lng: 119.461123, lat: 26.083497 },
-            { lng: 119.47952, lat: 27.071917 },
-            { lng: 117.869757, lat: 27.104853 }
-          ],
-          [
-            { lng: 117.98474, lat: 25.729904 },
-            { lng: 117.98014, lat: 25.241451 },
-            { lng: 118.711433, lat: 25.170312 },
-            { lng: 118.748227, lat: 25.659057 },
-            { lng: 117.957144, lat: 25.73407 }
+            { lng: 119.539067, lat: 26.076305 },
+            { lng: 117.9477, lat: 26.076305 },
+            { lng: 117.9477, lat: 27.406037 },
+            { lng: 119.539067, lat: 27.406037 },
+            { lng: 119.539067, lat: 26.076305 }
           ],
           []
         ]
@@ -56,15 +112,11 @@ export default {
   },
   methods: {
     handler({ BMap, map }) {
-      // this.Bmap = BMap;
-      // this.map = map;
       console.log(BMap, map);
-      // this.center = "福建";
-      // console.log(this.center.lng, this.center.lat, this.zoom);
-      this.center.lng = 119.29035;
-      this.center.lat = 26.1039;
-      this.zoom = 9;
-      // console.log(this.center.lng, this.center.lat, this.zoom);
+      this.center.lng = 118.69035;
+      this.center.lat = 26.7539;
+      this.zoom = 10;
+      Map.addOverlay({ lng: 118.9477, lat: 26.076305 });
     },
     toggle(name) {
       this[name].editing = !this[name].editing;
@@ -84,6 +136,7 @@ export default {
       if (path.length === 1) {
         path.push(e.point);
       }
+      //path 是临时点
       this.$set(path, path.length - 1, e.point);
     },
     newPolyline(e) {
