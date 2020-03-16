@@ -21,7 +21,7 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      redirect: '/nav1/n1c1'
+      redirect: '/nav1/n1c2'
     },
     {
       path: '/nav1',
