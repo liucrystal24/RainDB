@@ -8,7 +8,7 @@
     </header>
     <div class="headernav">
       <div class="navcontent" @click="navchange1">
-        <router-link :to="{name:'n1c1'}" class="nava" :class="{nav_active:navshow == 1}">福建省</router-link>
+        <router-link :to="{name:'n1c2'}" class="nava" :class="{nav_active:navshow == 1}">福建省</router-link>
       </div>
       <div class="navcontent" @click="navchange2">
         <router-link :to="{name:'n2c1'}" class="nava" :class="{nav_active:navshow == 2}">海南省</router-link>

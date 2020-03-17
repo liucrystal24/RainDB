@@ -10,15 +10,64 @@
     @rightclick="newPolyline"
     @ready="handler"
   >
+    <bm-control>
+      <el-button
+        icon="el-icon-search"
+        circle
+        type="primary"
+        class="searchbutton"
+        @click="form.show=!form.show"
+      ></el-button>
+      <el-collapse-transition>
+        <el-form
+          ref="form"
+          :model="form"
+          label-width="80px"
+          class="searchcontainer"
+          size="mini"
+          v-if="form.show"
+        >
+          <el-form-item label="站号">
+            <el-select v-model="form.stationnum" placeholder="请选择站号">
+              <el-option label="区域一" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="日期">
+            <el-date-picker
+              type="date"
+              placeholder="选择日期"
+              v-model="form.date"
+              style="width: 100%;"
+              :default-value="form.defaultdate"
+            ></el-date-picker>
+          </el-form-item>
+          <el-form-item label="时间">
+            <el-time-select
+              v-model="form.date2"
+              :picker-options="{
+                start: '08:00',
+                step: '12:00',
+                end: '20:00'
+              }"
+              placeholder="选择时间"
+            ></el-time-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit" class="submitbutton">查询</el-button>
+          </el-form-item>
+        </el-form>
+      </el-collapse-transition>
+    </bm-control>
     <bm-copyright
       anchor="BMAP_ANCHOR_BOTTOM_RIGHT"
       :copyright="[{id: 1, content: '南京云卫通软件技术有限公司'}]"
     ></bm-copyright>
     <!-- 按钮插件 bm-control-->
-    <bm-control>
+    <!-- <bm-control>
       <button @click="toggle('polyline')">{{ polyline.editing ? '停止绘制' : '开始绘制' }}</button>
       <button>123</button>
-    </bm-control>
+    </bm-control>-->
 
     <!-- 画折线线查件组，只需要在polyline.paths加入经纬度数组，即可 -->
     <bm-polyline
@@ -32,6 +81,14 @@
     <bm-polyline :path="recPath3" stroke-color="#0303FF"></bm-polyline>
     <bm-polyline :path="recPath4" stroke-color="#FF02FF"></bm-polyline>
     <bm-polyline :path="recPath5" stroke-color="#FF0000"></bm-polyline>
+    <!-- 站点 -->
+    <bm-point-collection
+      :points="points"
+      shape="BMAP_POINT_SHAPE_CIRCLE"
+      color="red"
+      size="BMAP_POINT_SIZE_SMALL"
+      @click="clickHandler"
+    ></bm-point-collection>
   </baidu-map>
 </template>
 
@@ -107,16 +164,68 @@ export default {
           ],
           []
         ]
-      }
+      },
+      //searchdialog
+      searchdialog: false,
+      form: {
+        stationnum: "",
+        date: "",
+        defaultdate: new Date(2014, 4, 8),
+        show: false
+      },
+      points: []
     };
   },
   methods: {
+    //drawer
+    handleClose(done) {
+      if (this.loading) {
+        return;
+      }
+      this.$confirm("确定要提交表单吗？")
+        .then(_ => {
+          this.loading = true;
+          this.timer = setTimeout(() => {
+            done();
+            // 动画关闭需要一定的时间
+            setTimeout(() => {
+              this.loading = false;
+            }, 400);
+          }, 2000);
+        })
+        .catch(_ => {});
+    },
+    cancelForm() {
+      this.loading = false;
+      this.dialog = false;
+      clearTimeout(this.timer);
+    },
+
     handler({ BMap, map }) {
       console.log(BMap, map);
       this.center.lng = 118.69035;
       this.center.lat = 26.7539;
       this.zoom = 10;
-      Map.addOverlay({ lng: 118.9477, lat: 26.076305 });
+      // Map.addOverlay({ lng: 118.9477, lat: 26.076305 });
+      const points = [];
+      let url = "/FJtankongStationNum";
+      this.axios.get(url, {}).then(
+        res => {
+          console.log(res.data.info.tankongStationNum);
+          let FJtankongStation = res.data.info.tankongStationNum;
+          for (let i = 0; i < FJtankongStation.length; i++) {
+            const position = {
+              lng: FJtankongStation[i].纬度,
+              lat: FJtankongStation[i].经度
+            };
+            points.push(position);
+          }
+          this.points = points;
+        },
+        res => {
+          console.log("err");
+        }
+      );
     },
     toggle(name) {
       this[name].editing = !this[name].editing;
@@ -160,6 +269,20 @@ export default {
       const { paths } = this.polyline;
       !paths.length && paths.push([]);
       paths[paths.length - 1].push(e.point);
+    },
+    clickHandler(e) {
+      alert(`单击点的坐标为：${e.point.lng}, ${e.point.lat}`);
+    },
+    onSubmit() {
+      let url = "/FJtankongStationNum";
+      this.axios.get(url, {}).then(
+        res => {
+          console.log(res.data.info);
+        },
+        res => {
+          console.log("err");
+        }
+      );
     }
   }
 };
@@ -170,5 +293,23 @@ export default {
   width: 100%;
   height: 100%;
   /* overflow: hidden; */
+}
+.searchcontainer {
+  background-color: #fff;
+  padding: 25px;
+  padding-left: 0;
+  padding-bottom: 20px;
+  border: 1px solid #1d6ec7;
+  position: fixed;
+  right: 80px;
+  top: 180px;
+}
+.searchbutton {
+  position: fixed;
+  right: 30px;
+  top: 180px;
+}
+.submitbutton {
+  margin-left: 70px;
 }
 </style>

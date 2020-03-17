@@ -101,9 +101,9 @@ a {
   margin-top: auto;
 }
 .comlogo {
-  width: 80px;
-  height: 80px;
-  border-radius: 40px;
+  width: 70px;
+  height: 70px;
+  border-radius: 35px;
   overflow: hidden;
   margin-left: 45px;
   /* position: absolute; */
@@ -114,7 +114,7 @@ a {
   widows: 100%;
   height: 100%;
   position: relative;
-  left: -15px;
+  /* left: -15px; */
   /* position: absolute;
   left: 5px; */
 }
