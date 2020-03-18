@@ -58,7 +58,8 @@ html,
 body,
 #app {
   height: 100%;
-  min-height: 500px;
+  min-height: 608px;
+  min-width:1080px;
 }
 .logo {
   width: 87px;
