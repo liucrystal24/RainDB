@@ -136,7 +136,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .searchcontainer {
   float: left;
   width: 35%;
