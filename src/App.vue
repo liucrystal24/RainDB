@@ -14,10 +14,10 @@
         <router-link :to="{name:'n2c1'}" class="nava" :class="{nav_active:navshow == 2}">海南省</router-link>
       </div>
       <div class="navcontent" @click="navchange3">
-        <router-link :to="{name:'child3'}" class="nava" :class="{nav_active:navshow == 3}">吉林省</router-link>
+        <router-link :to="{name:'n3c1'}" class="nava" :class="{nav_active:navshow == 3}">吉林省</router-link>
       </div>
       <div class="navcontent" @click="navchange4">
-        <router-link :to="{name:'child4'}" class="nava" :class="{nav_active:navshow == 4}">山东省</router-link>
+        <router-link :to="{name:'n4c1'}" class="nava" :class="{nav_active:navshow == 4}">山东省</router-link>
       </div>
     </div>
     <router-view class="navchildren" />
