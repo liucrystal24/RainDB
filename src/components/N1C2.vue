@@ -10,14 +10,16 @@
     @rightclick="newPolyline"
     @ready="handler"
   >
+    <!-- 查询条件 -->
     <bm-control>
       <el-button
         icon="el-icon-search"
         circle
         type="primary"
         class="searchbutton"
-        @click="form.show=!form.show"
+        @click="form.show = !form.show"
       ></el-button>
+      <!-- 查询条件form -->
       <el-collapse-transition>
         <el-form
           ref="form"
@@ -29,8 +31,14 @@
         >
           <el-form-item label="站号">
             <el-select v-model="form.stationnum" placeholder="请选择站号">
-              <el-option label="区域一" value="shanghai"></el-option>
-              <el-option label="区域二" value="beijing"></el-option>
+              <el-option label="10035" value="10035"></el-option>
+              <!-- <el-option label="区域二" value="beijing"></el-option> -->
+            </el-select>
+          </el-form-item>
+          <el-form-item label="要素">
+            <el-select v-model="form.fea" placeholder="请选择要素">
+              <el-option label="温度" value="温度"></el-option>
+              <!-- <el-option label="区域二" value="beijing"></el-option> -->
             </el-select>
           </el-form-item>
           <el-form-item label="日期">
@@ -54,15 +62,42 @@
             ></el-time-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit" class="submitbutton">查询</el-button>
+            <el-button type="primary" @click="onSubmit" class="submitbutton"
+              >查询</el-button
+            >
           </el-form-item>
         </el-form>
       </el-collapse-transition>
     </bm-control>
+
+    <!-- 查询图表 -->
+    <bm-control class="resultContainer" >
+      <div class="resultheader" v-if="chartShow">
+        <el-button
+          type="danger"
+          icon="el-icon-close"
+          class="closebutton"
+          @click="chartclose"
+        ></el-button>
+      </div>
+      <ve-line
+        class="resultContent"
+        :extend="extend"
+        height="400px"
+        :data="chartData"
+        :settings="chartSettings"
+        :toolbox="toolbox"
+        ref="feachart"
+        v-if="chartShow"
+      ></ve-line>
+    </bm-control>
+
+    <!-- 公司授权 -->
     <bm-copyright
       anchor="BMAP_ANCHOR_BOTTOM_RIGHT"
-      :copyright="[{id: 1, content: '南京云卫通软件技术有限公司'}]"
+      :copyright="[{ id: 1, content: '南京云卫通软件技术有限公司' }]"
     ></bm-copyright>
+
     <!-- 按钮插件 bm-control-->
     <!-- <bm-control>
       <button @click="toggle('polyline')">{{ polyline.editing ? '停止绘制' : '开始绘制' }}</button>
@@ -70,6 +105,7 @@
     </bm-control>-->
 
     <!-- 画折线线查件组，只需要在polyline.paths加入经纬度数组，即可 -->
+
     <bm-polyline
       :path="path"
       v-for="path of polyline.paths"
@@ -81,6 +117,7 @@
     <bm-polyline :path="recPath3" stroke-color="#0303FF"></bm-polyline>
     <bm-polyline :path="recPath4" stroke-color="#FF02FF"></bm-polyline>
     <bm-polyline :path="recPath5" stroke-color="#FF0000"></bm-polyline>
+
     <!-- 站点 -->
     <bm-point-collection
       :points="points"
@@ -171,9 +208,154 @@ export default {
         stationnum: "",
         date: "",
         defaultdate: new Date(2014, 4, 8),
-        show: false
+        show: false,
+        fea: ""
       },
-      points: []
+      points: [],
+      chartShow: false,
+      chartData: {
+        columns: ["气压", "温度"],
+        rows: [
+          {
+            气压: "100",
+            温度: "-51"
+          },
+          {
+            气压: "135",
+            温度: "-47"
+          },
+          {
+            气压: "150",
+            温度: "-49"
+          },
+          {
+            气压: "176",
+            温度: "-49"
+          },
+          {
+            气压: "199",
+            温度: "-47"
+          },
+          {
+            气压: "200",
+            温度: "-47"
+          },
+          {
+            气压: "242",
+            温度: "-51"
+          },
+          {
+            气压: "250",
+            温度: "-51"
+          },
+          {
+            气压: "252",
+            温度: "-52"
+          },
+          {
+            气压: "258",
+            温度: "-51"
+          },
+          {
+            气压: "275",
+            温度: "-48"
+          },
+          {
+            气压: "282",
+            温度: "-47"
+          },
+          {
+            气压: "300",
+            温度: "-43"
+          },
+          {
+            气压: "341",
+            温度: "-35"
+          },
+          {
+            气压: "394",
+            温度: "-27"
+          },
+          {
+            气压: "400",
+            温度: "-26"
+          },
+          {
+            气压: "436",
+            温度: "-21"
+          },
+          {
+            气压: "453",
+            温度: "-19"
+          },
+          {
+            气压: "469",
+            温度: "-18"
+          },
+          {
+            气压: "500",
+            温度: "-15"
+          },
+          {
+            气压: "542",
+            温度: "-10"
+          },
+          {
+            气压: "659",
+            温度: "-2"
+          },
+          {
+            气压: "700",
+            温度: "0"
+          },
+          {
+            气压: "751",
+            温度: "4"
+          },
+          {
+            气压: "820",
+            温度: "7"
+          },
+          {
+            气压: "850",
+            温度: "9"
+          },
+          {
+            气压: "863",
+            温度: "10"
+          },
+          {
+            气压: "925",
+            温度: "11"
+          },
+          {
+            气压: "997",
+            温度: "13"
+          }
+        ]
+      },
+      chartSettings: {
+        yAxisName: ["温度"],
+        xAxisName: ["气压"]
+      },
+      toolbox: {
+        feature: {
+          magicType: { type: ["line", "bar"] },
+          saveAsImage: {}
+        }
+      },
+      extend: {
+        series: {
+          label: {
+            normal: {
+              // show: true
+            }
+          }
+          // markLine: {
+          //   data: [{ type: "average", name: "平均值" }]
+          // }
+        }
+      }
     };
   },
   methods: {
@@ -274,15 +456,20 @@ export default {
       alert(`单击点的坐标为：${e.point.lng}, ${e.point.lat}`);
     },
     onSubmit() {
-      let url = "/FJtankongStationNum";
-      this.axios.get(url, {}).then(
-        res => {
-          console.log(res.data.info);
-        },
-        res => {
-          console.log("err");
-        }
-      );
+      this.chartShow = true;
+      // this.$refs[`feachart`].echarts.resize();
+      // let url = "";
+      // this.axios.get(url, {}).then(
+      //   res => {
+      //     console.log(res.data.info);
+      //   },
+      //   res => {
+      //     console.log("err");
+      //   }
+      // );
+    },
+    chartclose() {
+      this.chartShow = false;
     }
   }
 };
@@ -292,6 +479,7 @@ export default {
 .bm-view {
   width: 100%;
   height: 100%;
+  /* position: relative; */
   /* overflow: hidden; */
 }
 .searchcontainer {
@@ -311,5 +499,30 @@ export default {
 }
 .submitbutton {
   margin-left: 70px;
+}
+.resultContainer {
+  width: 800px;
+  background-color: #fff;
+  position: absolute;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%);
+}
+.resultheader {
+  background-color: #4b9efc;
+  height: 25px;
+}
+.resultContent {
+  border: 1px solid #ddd;
+  border-top: 0;
+  /* height:750px; */
+}
+.closebutton {
+  width: 30px;
+  height: 22px;
+  padding: 0px;
+  margin-top: 1px;
+  float: right;
+  margin-right: 5px;
 }
 </style>

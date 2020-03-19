@@ -5,16 +5,32 @@
         <i class="el-icon-s-data"></i>
         数据库列表
       </div>
-      <div :class="{leftactive:leftnum==2}" class="leftnavitem" @click="leftnav2">
+      <div
+        :class="{ leftactive: leftnum == 2 }"
+        class="leftnavitem"
+        @click="leftnav2"
+      >
         <router-link :to="{ name: 'n1c2' }" class="lefta">探空</router-link>
       </div>
-      <div :class="{leftactive:leftnum==1}" class="leftnavitem" @click="leftnav1">
+      <div
+        :class="{ leftactive: leftnum == 1 }"
+        class="leftnavitem"
+        @click="leftnav1"
+      >
         <router-link :to="{ name: 'n1c1' }" class="lefta">雷达</router-link>
       </div>
-      <div :class="{leftactive:leftnum==3}" class="leftnavitem" @click="leftnav3">
+      <div
+        :class="{ leftactive: leftnum == 3 }"
+        class="leftnavitem"
+        @click="leftnav3"
+      >
         <router-link :to="{ name: 'n1c3' }" class="lefta">雨滴谱</router-link>
       </div>
-      <div :class="{leftactive:leftnum==4}" class="leftnavitem" @click="leftnav4">
+      <div
+        :class="{ leftactive: leftnum == 4 }"
+        class="leftnavitem"
+        @click="leftnav4"
+      >
         <router-link :to="{ name: 'n1c4' }" class="lefta">自动站</router-link>
       </div>
       <div class="footer">
@@ -131,5 +147,6 @@ a {
   padding-left: 170px;
   box-sizing: border-box;
   height: 100%;
+  /* position: relative; */
 }
 </style>

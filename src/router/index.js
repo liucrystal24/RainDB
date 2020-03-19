@@ -16,7 +16,7 @@ import N2C3 from '@/components/N2C3'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',
