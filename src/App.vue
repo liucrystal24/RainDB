@@ -72,7 +72,7 @@ body,
   width: 205px;
   height: 150px;
   overflow: hidden;
-  background-color: #6995eb;
+  background-color: #2958DE;
   padding-top: 10px;
   float: left;
 }
