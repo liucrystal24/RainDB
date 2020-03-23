@@ -18,6 +18,7 @@
         type="primary"
         class="searchbutton"
         @click="form.show = !form.show"
+        v-if='searchbuttonshow'
       ></el-button>
       <!-- 查询条件form -->
       <el-collapse-transition>
@@ -136,6 +137,7 @@ export default {
     return {
       center: { lng: 119.29035, lat: 26.1039 },
       zoom: 9,
+      searchbuttonshow:false,
       mapStyle: {
         styleJson: [
           {
@@ -387,7 +389,7 @@ export default {
       console.log(BMap, map);
       this.center.lng = 118.69035;
       this.center.lat = 26.7539;
-      this.zoom = 10;
+      this.zoom = 9;
       // Map.addOverlay({ lng: 118.9477, lat: 26.076305 });
       const points = [];
       let url = "/FJtankongStationNum";

@@ -18,6 +18,7 @@
         type="primary"
         class="searchbutton"
         @click="form.show = !form.show"
+        v-if="searchbuttonshow"
       ></el-button>
       <!-- 查询条件form -->
       <el-collapse-transition>
@@ -217,6 +218,7 @@ export default {
       },
       //searchdialog
       searchdialog: false,
+      searchbuttonshow:false,
       form: {
         stationnum: "",
         startdate: "",
@@ -226,7 +228,7 @@ export default {
         endtime: "",
         enddefaultdate: new Date(2014, 6, 12),
         show: false,
-        fea: ""
+        fea: "",
       },
       points: [],
       chartShow: false,
@@ -337,7 +339,7 @@ export default {
       console.log(BMap, map);
       this.center.lng = 118.69035;
       this.center.lat = 26.7539;
-      this.zoom = 10;
+      this.zoom = 9;
       // Map.addOverlay({ lng: 118.9477, lat: 26.076305 });
       const points = [];
       let url = "/FJzidongStationNum";

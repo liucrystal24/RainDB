@@ -8,6 +8,7 @@ import N1C1 from "@/components/N1C1";
 import N1C2 from "@/components/N1C2";
 import N1C3 from "@/components/N1C3";
 import N1C4 from "@/components/N1C4";
+import N1C5 from "@/components/N1C5";
 
 import N2C1 from "@/components/N2C1";
 import N2C2 from "@/components/N2C2";
@@ -20,7 +21,6 @@ import N4C4 from "@/components/N4C4";
 import N4C5 from "@/components/N4C5";
 import N4C6 from "@/components/N4C6";
 
-
 Vue.use(Router);
 
 export default new Router({
@@ -29,7 +29,7 @@ export default new Router({
     {
       path: "/",
       name: "index",
-      redirect: "/nav1/n1c2"
+      redirect: "/nav1/n1c4"
     },
     {
       path: "/nav1",
@@ -55,6 +55,11 @@ export default new Router({
           path: "n1c4",
           name: "n1c4",
           component: N1C4
+        },
+        {
+          path: "n1c5",
+          name: "n1c5",
+          component: N1C5
         }
       ]
     },
