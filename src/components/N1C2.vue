@@ -18,7 +18,7 @@
         type="primary"
         class="searchbutton"
         @click="form.show = !form.show"
-        v-if='searchbuttonshow'
+        v-if="searchbuttonshow"
       ></el-button>
       <!-- 查询条件form -->
       <el-collapse-transition>
@@ -63,23 +63,16 @@
             ></el-time-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit" class="submitbutton"
-              >查询</el-button
-            >
+            <el-button type="primary" @click="onSubmit" class="submitbutton">查询</el-button>
           </el-form-item>
         </el-form>
       </el-collapse-transition>
     </bm-control>
 
     <!-- 查询图表 -->
-    <bm-control class="resultContainer" >
+    <bm-control class="resultContainer">
       <div class="resultheader" v-if="chartShow">
-        <el-button
-          type="danger"
-          icon="el-icon-close"
-          class="closebutton"
-          @click="chartclose"
-        ></el-button>
+        <el-button type="danger" icon="el-icon-close" class="closebutton" @click="chartclose"></el-button>
       </div>
       <ve-line
         class="resultContent"
@@ -105,6 +98,7 @@
       <button>123</button>
     </bm-control>-->
 
+    <bm-boundary name="福建省" :strokeWeight="2" strokeColor="yellow"></bm-boundary>
     <!-- 画折线线查件组，只需要在polyline.paths加入经纬度数组，即可 -->
 
     <bm-polyline
@@ -137,7 +131,7 @@ export default {
     return {
       center: { lng: 119.29035, lat: 26.1039 },
       zoom: 9,
-      searchbuttonshow:false,
+      searchbuttonshow: false,
       mapStyle: {
         styleJson: [
           {

@@ -7,8 +7,9 @@
           <div class="pcompany">中国气象科学研究院</div>
         </div>
         <div class="headerright">
-          <div class="projectname">人工增雨随机化外场试验和效果检验技术研究(数据库)</div>
-          <div class="headernav">
+          <div class="projectname">人工增雨随机化试验样本数据库</div>
+          <!-- <div class="secname">—— 随机化外场试验样本数据库</div> -->
+          <!-- <div class="headernav">
             <div class="navcontent" @click="navchange1">
               <router-link :to="{name:'n1c2'}" class="nava" :class="{nav_active:navshow == 1}">福建省</router-link>
             </div>
@@ -21,7 +22,7 @@
             <div class="navcontent" @click="navchange4">
               <router-link :to="{name:'n4c1'}" class="nava" :class="{nav_active:navshow == 4}">山东省</router-link>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
       <!-- <div class="projectname">人工增雨随机化试验样本数据库</div> -->
@@ -69,52 +70,63 @@ body,
   min-width: 1080px;
 }
 .logo {
-  width: 205px;
-  height: 150px;
+  width: 255px;
+  height: 120px;
   overflow: hidden;
-  background-color: #2958DE;
+  background-color: #2958de;
   padding-top: 10px;
   float: left;
+  box-sizing: border-box;
 }
 .logo img {
-  width: 100px;
-  line-height: 100px;
+  width: 80px;
+  line-height: 80px;
   /* height: 100px; */
 }
 .pcompany {
   width: 100%;
-  line-height: 50px;
+  line-height: 40px;
   height: 50px;
   font-size: 18px;
   color: #fff;
 }
 .projectname {
-  float: left;
-  position: relative;
-  left: 90px;
-  line-height: 100px;
+  padding-left: 100px;
+  text-align: left;
+  line-height: 120px;
+  height: 120px;
   font-weight: bolder;
-  font-size: 32px;
+  font-size: 45px;
+  text-shadow: 1px 1px #444;
+}
+.secname {
+  padding-left: 615px;
+  text-align: left;
+  line-height: 5px;
+  height: 20px;
+  font-size: 20px;
 }
 
 header {
   width: 100%;
-  height: 150px;
+  height: 120px;
   background-color: #e8eaf2;
   float: left;
   color: #273c9b;
+  box-sizing: border-box;
+  border-bottom: 2px solid #2958de;
 
   /* line-height: 100px; */
 }
 .header {
   float: left;
-  height: 150px;
+  height: 120px;
   width: 100%;
 }
 .headerright {
   width: 100%;
-  padding-left: 205px;
-  height: 150px;
+  padding-left: 255px;
+  height: 120px;
   box-sizing: border-box;
 }
 .headernav {
@@ -157,7 +169,7 @@ header {
 .navchildren {
   height: 100%;
   /* position: absolute; */
-  padding-top: 150px;
+  padding-top: 120px;
   box-sizing: border-box;
 }
 </style>
