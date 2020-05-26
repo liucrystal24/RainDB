@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  name: "N1C2",
+  name: "N0C2",
   data() {
     return {
-      msg: "N1C2"
+      msg: "N0C2"
     };
   }
 };

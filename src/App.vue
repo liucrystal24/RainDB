@@ -8,24 +8,8 @@
         </div>
         <div class="headerright">
           <div class="projectname">人工增雨随机化试验样本数据库</div>
-          <!-- <div class="secname">—— 随机化外场试验样本数据库</div> -->
-          <!-- <div class="headernav">
-            <div class="navcontent" @click="navchange1">
-              <router-link :to="{name:'n1c2'}" class="nava" :class="{nav_active:navshow == 1}">福建省</router-link>
-            </div>
-            <div class="navcontent" @click="navchange2">
-              <router-link :to="{name:'n2c1'}" class="nava" :class="{nav_active:navshow == 2}">海南省</router-link>
-            </div>
-            <div class="navcontent" @click="navchange3">
-              <router-link :to="{name:'n3c1'}" class="nava" :class="{nav_active:navshow == 3}">吉林省</router-link>
-            </div>
-            <div class="navcontent" @click="navchange4">
-              <router-link :to="{name:'n4c1'}" class="nava" :class="{nav_active:navshow == 4}">山东省</router-link>
-            </div>
-          </div>-->
         </div>
       </div>
-      <!-- <div class="projectname">人工增雨随机化试验样本数据库</div> -->
     </header>
 
     <router-view class="navchildren" />
@@ -67,7 +51,7 @@ body,
 #app {
   height: 100%;
   min-height: 608px;
-  min-width: 1080px;
+  min-width: 1218px;
 }
 .logo {
   width: 255px;

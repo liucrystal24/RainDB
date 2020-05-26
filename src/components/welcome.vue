@@ -1,15 +1,15 @@
 <template>
   <div>
-    <p>this is {{msg}}</p>
+    <img src="../assets/welcome.png" alt="">
   </div>
 </template>
 
 <script>
 export default {
-  name: "N1C2",
+  name: "welcome",
   data() {
     return {
-      msg: "N1C2"
+      msg: "welcome"
     };
   }
 };

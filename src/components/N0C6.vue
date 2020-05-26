@@ -10,16 +10,10 @@
         <el-col :span="18">
           <div class="titletext">条件筛选</div>
         </el-col>
-        <div class="datades">数据区间：2014.7.14~2018.11.16</div>
+        <div class="datades">数据区间：2015.6.6~2018.8.28</div>
       </el-row>
       <el-form ref="dateselect" :model="dateselect" label-width="30%">
         <el-form-item label="起始日期">
-          <!-- <el-date-picker
-            type="date"
-            placeholder="选择起始日期"
-            v-model="dateselect.startdate"
-            :default-value="dateselect.startdefaultdate"
-          ></el-date-picker>-->
           <el-date-picker
             v-model="dateselect.startdate"
             type="datetime"
@@ -27,13 +21,6 @@
             :default-value="dateselect.startdefaultdate"
           ></el-date-picker>
         </el-form-item>
-        <!-- <el-form-item label="起始时间">
-          <el-select v-model="dateselect.starttime" placeholder="请选起始时间">
-            <el-option label="08:00" value="08:00"></el-option>
-            <el-option label="20:00" value="20:00"></el-option>
-          </el-select>
-        </el-form-item>-->
-
         <el-form-item label="结束日期">
           <el-date-picker
             v-model="dateselect.enddate"
@@ -41,19 +28,7 @@
             placeholder="选择日期时间"
             :default-value="dateselect.enddefaultdate"
           ></el-date-picker>
-          <!-- <el-date-picker
-            type="date"
-            placeholder="选择结束日期"
-            v-model="dateselect.enddate"
-            :default-value="dateselect.enddefaultdate"
-          ></el-date-picker>-->
         </el-form-item>
-        <!-- <el-form-item label="结束时间">
-          <el-select v-model="dateselect.endtime" placeholder="请选结束时间">
-            <el-option label="08:00" value="08:00"></el-option>
-            <el-option label="20:00" value="20:00"></el-option>
-          </el-select>
-        </el-form-item>-->
         <el-form-item>
           <el-button type="primary" @click="searchleida">查询</el-button>
           <el-button>取消</el-button>
@@ -92,16 +67,6 @@
               <span style="margin-left:10px">{{ scope.row.datetime }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="类型" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.type }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="id" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.id }}</span>
-            </template>
-          </el-table-column>
           <el-table-column label="操作" header-align="center" align="center">
             <template slot-scope="scope">
               <el-button
@@ -126,21 +91,23 @@
         ></el-pagination>
       </div>
     </div>
+    <loadingWindow context="文件" v-show="loading"></loadingWindow>
   </div>
 </template>
 
 <script>
+import loadingWindow from "./loading";
 export default {
-  name: "N1C5",
+  name: "N0C6",
   data() {
     return {
       dateselect: {
         startdate: "",
         starttime: "",
-        startdefaultdate: new Date(2014, 6, 14),
+        startdefaultdate: new Date(2015, 5, 6),
         enddate: "",
         endtime: "",
-        enddefaultdate: new Date(2014, 6, 14)
+        enddefaultdate: new Date(2015, 5, 7)
       },
       form: {
         stationnum: "",
@@ -153,22 +120,32 @@ export default {
       tableDataCookies: [],
       // leidanum: 0,
       currentPage: 1,
-      pageSize: 5
+      pageSize: 5,
+      loading: false
     };
   },
   methods: {
     searchleida() {
       let startdate = this.format(this.dateselect.startdate);
       let enddate = this.format(this.dateselect.enddate);
-      let url = "/FJleidaSearch";
+      let url = "/JLleidaSearch";
       console.log(startdate, enddate);
       this.axios
         .get(url, { params: { startdate: startdate, enddate: enddate } })
         .then(
           res => {
             console.log("success");
-            console.log(res.data.info.leida);
-            this.tableData = res.data.info.leida;
+            if (res.data.code == 0) {
+              this.$alert("此时间段没有数据", "提示", {
+                confirmButtonText: "确定",
+                callback: action => {
+                  console.log(action);
+                }
+              });
+            } else {
+              console.log(res.data);
+              this.tableData = res.data.info.leida;
+            }
           },
           res => {
             console.log(res);
@@ -180,19 +157,22 @@ export default {
     },
     handleDownload(index, row) {
       console.log(index, row);
+      this.loading = true;
       let datetime = row.datetime;
       let type = row.type;
       let id = row.id;
-      let url = "/FJleidaFile";
+      let url = "/JLleidaFile";
       this.axios({
         method: "post",
         url: url,
-        data: { datetime: datetime, type: type, id: id },
+        data: { datetime: datetime },
         responseType: "arraybuffer"
       })
         .then(res => {
           console.log("success");
+          this.loading = false;
           const data = res.data;
+          console.log(res.data);
           const url = window.URL.createObjectURL(
             new Blob([data], {
               type:
@@ -202,11 +182,14 @@ export default {
           const link = document.createElement("a");
           link.style.display = "none";
           link.href = url;
-          let datename = datetime.replace(/[:," ",-]/g, "");
-          link.setAttribute(
-            "download",
-            datename + "_" + type + "_" + id + ".bin.bz2"
-          );
+
+          datetime = datetime.replace(/[:,-]/g, "");
+          // console.log(datetime);
+          let datefirst = datetime.split(" ")[0];
+          let datesecond = datetime.split(" ")[1].slice(2, 4);
+          // console.log({ datefirst, datesecond });
+          // console.log(datefirst, datesecond);
+          link.setAttribute("download", datefirst + "." + datesecond + "V");
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -227,7 +210,8 @@ export default {
       const month = date.getMonth() + 1;
       const day = date.getDate();
 
-      const hour = date.getHours();
+      const hour =
+        date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
       const minute =
         date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
       // var minute = date.getMinutes();
@@ -249,7 +233,8 @@ export default {
         second
       );
     }
-  }
+  },
+  components: { loadingWindow }
 };
 </script>
 

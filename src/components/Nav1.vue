@@ -1,9 +1,14 @@
 <template>
   <div class="hello">
     <div class="leftnav">
-      <el-scrollbar native="false" noresize="true" class="scrollcontainer">
+      <el-scrollbar
+        native="true"
+        noresize="true"
+        class="scrollcontainer"
+        wrap-style="overflow-x:hidden;"
+      >
         <el-menu
-          default-active="2"
+          :default-active="$route.path.split('nav1/')[1]"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
@@ -13,7 +18,10 @@
           unique-opened="true"
           router="true"
         >
-          <el-menu-item index="0" style="textAlign:left;height:55px;lineHeight:55px;">
+          <el-menu-item
+            index="welcome"
+            style="textAlign:left;height:55px;lineHeight:55px;"
+          >
             <span class="navBlank"></span>
             <i class="el-icon-menu navicon"></i>
             <span slot="title">数据库总览</span>
@@ -24,10 +32,13 @@
               <i class="el-icon-location navicon"></i>
               <span>吉林省</span>
             </template>
-            <el-menu-item index="3-1">选项1</el-menu-item>
-            <el-menu-item index="3-2">选项2</el-menu-item>
-            <el-menu-item index="3-3">选项3</el-menu-item>
-            <el-menu-item index="3-4">选项4</el-menu-item>
+            <el-menu-item index="n0c1">地图总览</el-menu-item>
+            <el-menu-item index="n0c2">试验样本</el-menu-item>
+            <el-menu-item index="n0c3">雨滴谱</el-menu-item>
+            <el-menu-item index="n0c4">辐射计</el-menu-item>
+            <el-menu-item index="n0c5">无人机</el-menu-item>
+            <el-menu-item index="n0c6">雷达</el-menu-item>
+            <el-menu-item index="n0c7">自动站</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -35,11 +46,11 @@
               <i class="el-icon-location navicon"></i>
               <span>福建省</span>
             </template>
-            <el-menu-item index="n1c4">地图总览</el-menu-item>
-            <el-menu-item index="n1c7">试验样本</el-menu-item>
-            <el-menu-item index="n1c1">探空</el-menu-item>
-            <el-menu-item index="n1c5">雷达</el-menu-item>
-            <el-menu-item index="n1c3">雨滴谱</el-menu-item>
+            <el-menu-item index="n1c1">地图总览</el-menu-item>
+            <el-menu-item index="n1c2">试验样本</el-menu-item>
+            <el-menu-item index="n1c3">探空</el-menu-item>
+            <el-menu-item index="n1c4">雷达</el-menu-item>
+            <el-menu-item index="n1c5">雨滴谱</el-menu-item>
             <el-menu-item index="n1c6">自动站</el-menu-item>
           </el-submenu>
 
@@ -68,28 +79,13 @@
           </el-submenu>
         </el-menu>
 
-        <div class="footer">
+        <!-- <div class="footer">
           <div class="comlogo">
             <img src="../assets/comlogo.png" />
           </div>
           <div class="leftcompany">南京云卫通软件技术有限公司</div>
-        </div>
+        </div>-->
       </el-scrollbar>
-      <!-- <div :class="{ leftactive: leftnum == 2 }" class="leftnavitem" @click="leftnav2">
-        <router-link :to="{ name: 'n1c4' }" class="lefta">地图总览</router-link>
-      </div>
-      <div :class="{ leftactive: leftnum == 5 }" @click="leftnav5" class="leftnavitem">
-        <router-link :to="{ name: 'n1c5' }" class="lefta">探空</router-link>
-      </div>
-      <div :class="{ leftactive: leftnum == 1 }" class="leftnavitem" @click="leftnav1">
-        <router-link :to="{ name: 'n1c1' }" class="lefta">雷达</router-link>
-      </div>
-      <div :class="{ leftactive: leftnum == 3 }" class="leftnavitem" @click="leftnav3">
-        <router-link :to="{ name: 'n1c3' }" class="lefta">雨滴谱</router-link>
-      </div>
-      <div :class="{ leftactive: leftnum == 4 }" class="leftnavitem" @click="leftnav4">
-        <router-link :to="{ name: 'n1c6' }" class="lefta">自动站</router-link>
-      </div>-->
 
       <!-- <div class="footer">
       <div class="comlogo">
@@ -102,11 +98,8 @@
   </div>
 </template>
 
-
-
-
 <script>
-import "@/assets/css/scorll.css";
+// import "@/assets/css/scorll.css";
 export default {
   name: "Nav1",
   data() {
@@ -114,27 +107,10 @@ export default {
       leftnum: 2
     };
   },
-  methods: {
-    leftnav1() {
-      this.leftnum = 1;
-    },
-    leftnav2() {
-      this.leftnum = 2;
-    },
-    leftnav3() {
-      this.leftnum = 3;
-    },
-    leftnav4() {
-      this.leftnum = 4;
-    },
-    leftnav5() {
-      this.leftnum = 5;
-    }
-  }
+  methods: {}
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 a {
   color: #fff;
@@ -258,7 +234,7 @@ a {
 }
 
 .el-menu-item.is-active {
-  color: #fff !important;
-  background: #409eff !important;
+  color: #ffd04b !important;
+  background: #273c9b !important;
 }
 </style>

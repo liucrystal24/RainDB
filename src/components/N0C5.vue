@@ -10,52 +10,17 @@
         <el-col :span="18">
           <div class="titletext">条件筛选</div>
         </el-col>
-        <div class="datades">数据区间：2014.7.14~2018.11.16</div>
+        <div class="datades">数据区间：2015.6.6~2017.8.27</div>
       </el-row>
       <el-form ref="dateselect" :model="dateselect" label-width="30%">
-        <el-form-item label="起始日期">
-          <!-- <el-date-picker
-            type="date"
-            placeholder="选择起始日期"
-            v-model="dateselect.startdate"
-            :default-value="dateselect.startdefaultdate"
-          ></el-date-picker>-->
-          <el-date-picker
-            v-model="dateselect.startdate"
-            type="datetime"
-            placeholder="选择日期时间"
-            :default-value="dateselect.startdefaultdate"
-          ></el-date-picker>
-        </el-form-item>
-        <!-- <el-form-item label="起始时间">
-          <el-select v-model="dateselect.starttime" placeholder="请选起始时间">
-            <el-option label="08:00" value="08:00"></el-option>
-            <el-option label="20:00" value="20:00"></el-option>
+        <el-form-item label="查询方式">
+          <el-select v-model="dateselect.style" placeholder="请选择查询方式">
+            <el-option label="查询" value="查询"> </el-option>
+            <el-option label="统计" value="统计"> </el-option>
           </el-select>
-        </el-form-item>-->
-
-        <el-form-item label="结束日期">
-          <el-date-picker
-            v-model="dateselect.enddate"
-            type="datetime"
-            placeholder="选择日期时间"
-            :default-value="dateselect.enddefaultdate"
-          ></el-date-picker>
-          <!-- <el-date-picker
-            type="date"
-            placeholder="选择结束日期"
-            v-model="dateselect.enddate"
-            :default-value="dateselect.enddefaultdate"
-          ></el-date-picker>-->
         </el-form-item>
-        <!-- <el-form-item label="结束时间">
-          <el-select v-model="dateselect.endtime" placeholder="请选结束时间">
-            <el-option label="08:00" value="08:00"></el-option>
-            <el-option label="20:00" value="20:00"></el-option>
-          </el-select>
-        </el-form-item>-->
         <el-form-item>
-          <el-button type="primary" @click="searchleida">查询</el-button>
+          <el-button type="primary" @click="searchTable">查询</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
@@ -68,7 +33,7 @@
           </div>
         </el-col>
         <el-col :span="20">
-          <div class="titletext">雷达文件</div>
+          <div class="titletext">无人机文件</div>
         </el-col>
       </el-row>
       <div class="tableContainer">
@@ -82,24 +47,14 @@
           style="width: 100%;text-align:center"
         >
           <el-table-column
-            label="日期"
+            :label="item"
+            v-for="(item, index) in tableTitle"
+            :key="item"
             header-align="center"
             align="center"
-            width="180"
           >
             <template slot-scope="scope">
-              <i class="el-icon-time"></i>
-              <span style="margin-left:10px">{{ scope.row.datetime }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="类型" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.type }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="id" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.id }}</span>
+              {{ scope.row[item] }}
             </template>
           </el-table-column>
           <el-table-column label="操作" header-align="center" align="center">
@@ -131,16 +86,11 @@
 
 <script>
 export default {
-  name: "N1C5",
+  name: "N0C5",
   data() {
     return {
       dateselect: {
-        startdate: "",
-        starttime: "",
-        startdefaultdate: new Date(2014, 6, 14),
-        enddate: "",
-        endtime: "",
-        enddefaultdate: new Date(2014, 6, 14)
+        style: ""
       },
       form: {
         stationnum: "",
@@ -153,46 +103,48 @@ export default {
       tableDataCookies: [],
       // leidanum: 0,
       currentPage: 1,
-      pageSize: 5
+      pageSize: 5,
+      tableTitle: []
     };
   },
   methods: {
-    searchleida() {
-      let startdate = this.format(this.dateselect.startdate);
-      let enddate = this.format(this.dateselect.enddate);
-      let url = "/FJleidaSearch";
-      console.log(startdate, enddate);
-      this.axios
-        .get(url, { params: { startdate: startdate, enddate: enddate } })
-        .then(
-          res => {
-            console.log("success");
-            console.log(res.data.info.leida);
-            this.tableData = res.data.info.leida;
-          },
-          res => {
-            console.log(res);
-          }
-        );
+    searchTable() {
+      let style = this.dateselect.style;
+      let url = "/JLwurenjiSearch";
+      this.axios.get(url, { params: { style } }).then(
+        res => {
+          console.log("success");
+          console.log(res.data.info.wurenjiTable);
+          this.tableTitle =
+            style == "查询" ? ["datetime", "number"] : ["year", "number"];
+          this.tableData = res.data.info.wurenjiTable;
+        },
+        res => {
+          console.log(res);
+        }
+      );
     },
     handleEdit(index, row) {
       console.log(index, row);
     },
     handleDownload(index, row) {
       console.log(index, row);
-      let datetime = row.datetime;
-      let type = row.type;
-      let id = row.id;
-      let url = "/FJleidaFile";
+      let datetime = this.dateselect.style == "查询" ? row.datetime : row.year.toString();
+      // let datetime = row.datetime;
+      let filestyle = this.dateselect.style == "查询" ? ".doc" : ".xlsx";
+      let style = this.dateselect.style;
+      let number = row.number;
+      let url = "/JLwurenjiFile";
       this.axios({
         method: "post",
         url: url,
-        data: { datetime: datetime, type: type, id: id },
+        data: { style, number },
         responseType: "arraybuffer"
       })
         .then(res => {
           console.log("success");
           const data = res.data;
+          console.log(data);
           const url = window.URL.createObjectURL(
             new Blob([data], {
               type:
@@ -202,11 +154,9 @@ export default {
           const link = document.createElement("a");
           link.style.display = "none";
           link.href = url;
+          console.log(datetime);
           let datename = datetime.replace(/[:," ",-]/g, "");
-          link.setAttribute(
-            "download",
-            datename + "_" + type + "_" + id + ".bin.bz2"
-          );
+          link.setAttribute("download", datename + "_" + number + filestyle);
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
