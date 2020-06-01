@@ -60,10 +60,15 @@
               <i class="el-icon-location navicon"></i>
               <span>山东省</span>
             </template>
-            <el-menu-item index="4-1">选项1</el-menu-item>
-            <el-menu-item index="4-2">选项2</el-menu-item>
-            <el-menu-item index="4-3">选项3</el-menu-item>
-            <el-menu-item index="4-4">选项4</el-menu-item>
+            <el-menu-item index="n2c1">地图总览</el-menu-item>
+            <el-menu-item index="n2c2">试验样本</el-menu-item>
+            <el-menu-item index="n2c31">雨量(常规)</el-menu-item>
+            <el-menu-item index="n2c32">雨量(自动站)</el-menu-item>
+            <el-menu-item index="n2c4">雷达</el-menu-item>
+            <el-menu-item index="n2c5">探空</el-menu-item>
+            <el-menu-item index="n2c6">天气图</el-menu-item>
+            <el-menu-item index="n2c7">雨量图</el-menu-item>
+            <el-menu-item index="n2c8">卫星</el-menu-item>
           </el-submenu>
 
           <el-submenu index="4">

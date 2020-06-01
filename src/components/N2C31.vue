@@ -10,10 +10,25 @@
         <el-col :span="18">
           <div class="titletext">条件筛选</div>
         </el-col>
-        <div class="datades">数据区间：2014.7.14~2019.5.28</div>
+        <div class="datades">数据区间：2014.5.10~2018.9.20</div>
       </el-row>
       <el-form ref="dateselect" :model="dateselect" label-width="30%">
-        <el-form-item label="起始日期">
+        <el-form-item label="日期">
+          <el-select
+            v-model="dateselect.date"
+            placeholder="请选择日期"
+            filterable
+          >
+            <el-option
+              v-for="item in dateOption"
+              :key="item"
+              :label="item"
+              :value="item"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <!-- <el-form-item label="起始日期">
           <el-date-picker
             v-model="dateselect.startdate"
             type="datetime"
@@ -29,7 +44,7 @@
             placeholder="选择日期时间"
             :default-value="dateselect.enddefaultdate"
           ></el-date-picker>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="站号">
           <el-select
             v-model="dateselect.stationid"
@@ -37,7 +52,7 @@
             filterable
           >
             <el-option
-              v-for="item in tankongStationOption"
+              v-for="item in StationOption"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -46,7 +61,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="searchleida">查询</el-button>
+          <el-button type="primary" @click="search">查询</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
@@ -59,7 +74,7 @@
           </div>
         </el-col>
         <el-col :span="20">
-          <div class="titletext">探空数据</div>
+          <div class="titletext">雨量数据</div>
           <div style="textAlign:right;paddingRight:100px;">
             <el-button @click="export2Excel" type="primary" size="small"
               >下载数据</el-button
@@ -79,74 +94,14 @@
           :border="true"
         >
           <el-table-column
-            label="日期"
+            :label="item"
+            v-for="item in tableTitle"
+            :key="item"
             header-align="center"
             align="center"
-            width="180"
           >
             <template slot-scope="scope">
-              <i class="el-icon-time"></i>
-              <span style="margin-left:10px">{{ scope.row.datetime }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="站号" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.站号 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="纬度" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.纬度 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="经度" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.经度 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="海拔" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.海拔 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="unknown"
-            header-align="center"
-            align="center"
-            width="90"
-          >
-            <template slot-scope="scope">
-              <span>{{ scope.row.unknown }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="气压" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.气压 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="高度" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.高度 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="温度" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.温度 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="位温" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.位温 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="风向" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.风向 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="风速" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.风速 }}</span>
+              {{ scope.row[item] }}
             </template>
           </el-table-column>
         </el-table>
@@ -168,7 +123,7 @@
 
 <script>
 export default {
-  name: "N1C1",
+  name: "N2C31",
   data() {
     return {
       dateselect: {
@@ -178,7 +133,8 @@ export default {
         enddate: "",
         endtime: "",
         enddefaultdate: new Date(2014, 6, 14),
-        stationid: ""
+        stationid: "",
+        date: "2015"
       },
       form: {
         stationnum: "",
@@ -188,31 +144,81 @@ export default {
         fea: ""
       },
       tableData: [],
-      tankongStationOption: [],
+      StationOption: [],
+      StationOption2015: [],
+      StationOptionOther: [],
       currentPage: 1,
-      pageSize: 5
+      pageSize: 5,
+      dateOption: [
+        "2015",
+        "20140510",
+        "20140704",
+        "20140705",
+        "20140729",
+        "20140730",
+        "20140914",
+        "20140915",
+        "20140916",
+        "20140928",
+        "20160502",
+        "20160623",
+        "20160825",
+        "20160926",
+        "20161015",
+        "20161024",
+        "20161027",
+        "20170404",
+        "20170412",
+        "20170416",
+        "20170503",
+        "20170706",
+        "20170727",
+        "20170730",
+        "20170930",
+        "20180424",
+        "20180422",
+        "20180515",
+        "20180613",
+        "20180625",
+        "20180626",
+        "20180918",
+        "20180919",
+        "20180920"
+      ],
+      tableTitle: []
     };
   },
   methods: {
-    searchleida() {
-      let starttime = this.format(this.dateselect.startdate);
-      let endtime = this.format(this.dateselect.enddate);
+    search() {
+      let date = this.dateselect.date;
       let stationid = this.dateselect.stationid;
-      let url = "/FJtankongSearch";
+      let url = "/SDrainRegularSearch";
       this.axios
         .get(url, {
           params: {
-            starttime: starttime,
-            endtime: endtime,
+            date: date,
             stationid: stationid
           }
         })
         .then(
           res => {
             console.log("success");
-            console.log(res.data);
-            // 探空数组
-            this.tableData = res.data.info.tankongsearch;
+            this.tableTitle = [];
+            if (res.data.info.table.length != 0) {
+              // tableTitle
+              Object.keys(res.data.info.table[0]).forEach(val => {
+                this.tableTitle.push(val);
+              });
+              // tableData
+              this.tableData = res.data.info.table;
+            } else {
+              this.$alert("此时间段没有数据", "提示", {
+                confirmButtonText: "确定",
+                callback: action => {
+                  console.log(action);
+                }
+              });
+            }
           },
           res => {
             console.log("err");
@@ -301,39 +307,13 @@ export default {
     export2Excel() {
       require.ensure([], () => {
         const { export_json_to_excel } = require("../vendor/Export2Excel");
-        const tHeader = [
-          "日期",
-          "站号",
-          "纬度",
-          "经度",
-          "海拔",
-          "unknown",
-          "气压",
-          "高度",
-          "温度",
-          "位温",
-          "风向",
-          "风速"
-        ];
-        const filterVal = [
-          "datetime",
-          "站号",
-          "纬度",
-          "经度",
-          "海拔",
-          "unknown",
-          "气压",
-          "高度",
-          "温度",
-          "位温",
-          "风向",
-          "风速"
-        ];
+        const tHeader = this.tableTitle;
+        const filterVal = this.tableTile;
         const list = this.tableData;
         const data = this.formatJson(filterVal, list);
         const tableLength = this.tableData.length;
         if (tableLength != 0) {
-          export_json_to_excel(tHeader, data, "福建探空数据");
+          export_json_to_excel(tHeader, data, "吉林雨量(常规)数据");
         } else {
           this.$alert("没有探空数据，请先查询", "提示", {
             confirmButtonText: "确定",
@@ -345,20 +325,41 @@ export default {
       });
     },
     findStationid() {
-      let url = "/FJtankongStationNum";
-      this.axios.get(url).then(
+      let url1 = "/SDrainStationNum2015";
+      let url2 = "/SDrainStationNumOther";
+      // let url = this.dateselect.date.indexOf("2015") == -1 ? url1 : url2;
+      this.axios.get(url1).then(
         res => {
           console.log("success");
-          this.tankongStationOption = [];
           // console.log(res.data);
-          let stationarr = res.data.info.tankongStationNum;
+          let stationarr = res.data.info.StationNum;
           // console.log(stationarr);
           stationarr.forEach((val, index) => {
             // console.log(val)
             let station = {};
-            station.value = val.站号;
-            station.label = val.站号;
-            this.tankongStationOption.push(station);
+            station.value = val.station;
+            station.label = val.station;
+            this.StationOption2015.push(station);
+            this.StationOption = this.StationOption2015;
+          });
+        },
+        res => {
+          console.log("err");
+          console.log(res);
+        }
+      );
+      this.axios.get(url2).then(
+        res => {
+          console.log("success");
+          // console.log(res.data);
+          let stationarr = res.data.info.StationNum;
+          // console.log(stationarr);
+          stationarr.forEach((val, index) => {
+            // console.log(val)
+            let station = {};
+            station.value = val.Station_Id_C;
+            station.label = val.Station_Name;
+            this.StationOptionOther.push(station);
           });
         },
         res => {
@@ -370,6 +371,18 @@ export default {
   },
   mounted() {
     this.findStationid();
+  },
+  watch: {
+    dateselect: {
+      handler(oldVal, newVal) {
+        if (newVal.date.indexOf("2015") == -1) {
+          this.StationOption = this.StationOptionOther;
+        } else {
+          this.StationOption = this.StationOption2015;
+        }
+      },
+      deep: true
+    }
   }
 };
 </script>

@@ -10,7 +10,7 @@
         <el-col :span="18">
           <div class="titletext">条件筛选</div>
         </el-col>
-        <div class="datades">数据区间：2014.7.14~2019.5.28</div>
+        <div class="datades">数据区间：2015.4.1~2017.12.31</div>
       </el-row>
       <el-form ref="dateselect" :model="dateselect" label-width="30%">
         <el-form-item label="起始日期">
@@ -37,7 +37,7 @@
             filterable
           >
             <el-option
-              v-for="item in tankongStationOption"
+              v-for="item in StationOption"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -46,7 +46,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="searchleida">查询</el-button>
+          <el-button type="primary" @click="search">查询</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
@@ -59,7 +59,7 @@
           </div>
         </el-col>
         <el-col :span="20">
-          <div class="titletext">探空数据</div>
+          <div class="titletext">雨量数据</div>
           <div style="textAlign:right;paddingRight:100px;">
             <el-button @click="export2Excel" type="primary" size="small"
               >下载数据</el-button
@@ -78,75 +78,30 @@
           style="width: 100%;text-align:center"
           :border="true"
         >
+          <el-table-column label="区站号" header-align="center" align="center">
+            <template slot-scope="scope">
+              <span>{{ scope.row.区站号 }}</span>
+            </template>
+          </el-table-column>
           <el-table-column
-            label="日期"
+            label="日期时间"
             header-align="center"
             align="center"
             width="180"
           >
             <template slot-scope="scope">
               <i class="el-icon-time"></i>
-              <span style="margin-left:10px">{{ scope.row.datetime }}</span>
+              <span style="margin-left:10px">{{ scope.row.日期时间 }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="站号" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.站号 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="纬度" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.纬度 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="经度" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.经度 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="海拔" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.海拔 }}</span>
-            </template>
-          </el-table-column>
+
           <el-table-column
-            label="unknown"
+            label="小时降水"
             header-align="center"
             align="center"
-            width="90"
           >
             <template slot-scope="scope">
-              <span>{{ scope.row.unknown }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="气压" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.气压 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="高度" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.高度 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="温度" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.温度 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="位温" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.位温 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="风向" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.风向 }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="风速" header-align="center" align="center">
-            <template slot-scope="scope">
-              <span>{{ scope.row.风速 }}</span>
+              <span>{{ scope.row.小时降水 }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -168,16 +123,16 @@
 
 <script>
 export default {
-  name: "N1C1",
+  name: "N2C32",
   data() {
     return {
       dateselect: {
         startdate: "",
         starttime: "",
-        startdefaultdate: new Date(2014, 6, 14),
+        startdefaultdate: new Date(2015, 3, 1),
         enddate: "",
         endtime: "",
-        enddefaultdate: new Date(2014, 6, 14),
+        enddefaultdate: new Date(2015, 3, 2),
         stationid: ""
       },
       form: {
@@ -188,17 +143,17 @@ export default {
         fea: ""
       },
       tableData: [],
-      tankongStationOption: [],
+      StationOption: [],
       currentPage: 1,
       pageSize: 5
     };
   },
   methods: {
-    searchleida() {
+    search() {
       let starttime = this.format(this.dateselect.startdate);
       let endtime = this.format(this.dateselect.enddate);
       let stationid = this.dateselect.stationid;
-      let url = "/FJtankongSearch";
+      let url = "/SDrainAutoSearch";
       this.axios
         .get(url, {
           params: {
@@ -211,8 +166,16 @@ export default {
           res => {
             console.log("success");
             console.log(res.data);
-            // 探空数组
-            this.tableData = res.data.info.tankongsearch;
+            if (res.data.code === 0) {
+              this.$alert("该时间段没有数据", "提示", {
+                confirmButtonText: "确定",
+                callback: action => {
+                  console.log(action);
+                }
+              });
+            } else {
+              this.tableData = res.data.info.table;
+            }
           },
           res => {
             console.log("err");
@@ -269,16 +232,17 @@ export default {
     },
     format(date) {
       const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
+      const month1 = date.getMonth() + 1;
+      const month = month1 < 10 ? "0" + month1 : month1;
+      const day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
 
-      const hour = date.getHours();
+      const hour =
+        date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
       const minute =
         date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-      // var minute = date.getMinutes();
+
       const second =
         date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-      // var second = date.getSeconds();
 
       return (
         year +
@@ -301,41 +265,15 @@ export default {
     export2Excel() {
       require.ensure([], () => {
         const { export_json_to_excel } = require("../vendor/Export2Excel");
-        const tHeader = [
-          "日期",
-          "站号",
-          "纬度",
-          "经度",
-          "海拔",
-          "unknown",
-          "气压",
-          "高度",
-          "温度",
-          "位温",
-          "风向",
-          "风速"
-        ];
-        const filterVal = [
-          "datetime",
-          "站号",
-          "纬度",
-          "经度",
-          "海拔",
-          "unknown",
-          "气压",
-          "高度",
-          "温度",
-          "位温",
-          "风向",
-          "风速"
-        ];
+        const tHeader = ["区站号", "日期时间", "小时降水"];
+        const filterVal = ["区站号", "日期时间", "小时降水"];
         const list = this.tableData;
         const data = this.formatJson(filterVal, list);
         const tableLength = this.tableData.length;
         if (tableLength != 0) {
-          export_json_to_excel(tHeader, data, "福建探空数据");
+          export_json_to_excel(tHeader, data, "吉林雨量(自动站)数据");
         } else {
-          this.$alert("没有探空数据，请先查询", "提示", {
+          this.$alert("没有数据，请先查询", "提示", {
             confirmButtonText: "确定",
             callback: action => {
               console.log(action);
@@ -345,20 +283,20 @@ export default {
       });
     },
     findStationid() {
-      let url = "/FJtankongStationNum";
+      let url = "/SDrainStationNumAuto";
       this.axios.get(url).then(
         res => {
           console.log("success");
-          this.tankongStationOption = [];
-          // console.log(res.data);
-          let stationarr = res.data.info.tankongStationNum;
+          this.StationOption = [];
+          console.log(res.data);
+          let stationarr = res.data.info.StationNum;
           // console.log(stationarr);
           stationarr.forEach((val, index) => {
             // console.log(val)
             let station = {};
-            station.value = val.站号;
-            station.label = val.站号;
-            this.tankongStationOption.push(station);
+            station.value = val.区站号;
+            station.label = val.区站号;
+            this.StationOption.push(station);
           });
         },
         res => {

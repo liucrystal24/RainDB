@@ -4,7 +4,7 @@ import Nav1 from "@/components/Nav1";
 // 欢迎界面
 import Welcome from "@/components/welcome";
 
-// N0xx 吉林
+// N0Cx 吉林
 import N0C1 from "@/components/N0C1";
 import N0C2 from "@/components/N0C2";
 import N0C3 from "@/components/N0C3";
@@ -13,7 +13,7 @@ import N0C5 from "@/components/N0C5";
 import N0C6 from "@/components/N0C6";
 import N0C7 from "@/components/N0C7";
 
-// N1xx 福建
+// N1Cx 福建
 import N1C1 from "@/components/N1C1";
 import N1C2 from "@/components/N1C2";
 import N1C3 from "@/components/N1C3";
@@ -21,10 +21,18 @@ import N1C4 from "@/components/N1C4";
 import N1C5 from "@/components/N1C5";
 import N1C6 from "@/components/N1C6";
 
+// N2Cx 山东
 import N2C1 from "@/components/N2C1";
 import N2C2 from "@/components/N2C2";
-import N2C3 from "@/components/N2C3";
+import N2C31 from "@/components/N2C31";
+import N2C32 from "@/components/N2C32";
+import N2C4 from "@/components/N2C4";
+import N2C5 from "@/components/N2C5";
+import N2C6 from "@/components/N2C6";
+import N2C7 from "@/components/N2C7";
+import N2C8 from "@/components/N2C8";
 
+// N3Cx 海南
 import N4C1 from "@/components/N4C1";
 import N4C2 from "@/components/N4C2";
 import N4C3 from "@/components/N4C3";
@@ -131,6 +139,61 @@ export default new Router({
           path: "n1c6",
           name: "n1c6",
           component: N1C6
+        },
+        // ---------山东----------
+        {
+          // 地图总览
+          path: "n2c1",
+          name: "n2c1",
+          component: N2C1
+        },
+        {
+          // 试验样本
+          path: "n2c2",
+          name: "n2c2",
+          component: N2C2
+        },
+        {
+          // 雨量
+          path: "n2c31",
+          name: "n2c31",
+          component: N2C31
+        },
+        {
+          // 雨量
+          path: "n2c32",
+          name: "n2c32",
+          component: N2C32
+        },
+        {
+          // 雷达
+          path: "n2c4",
+          name: "n2c4",
+          component: N2C4
+        },
+        {
+          // 探空
+          path: "n2c5",
+          name: "n2c5",
+          component: N2C5
+        },
+        {
+          // 天气图
+          path: "n2c6",
+          name: "n2c6",
+          component: N2C6
+        },
+        {
+          // 雨量图
+          path: "n2c7",
+          name: "n2c7",
+          component: N2C7
+        },
+        {
+          // 卫星
+          path: "n2c8",
+          name: "n2c8",
+          component: N2C8
         }
       ]
     }

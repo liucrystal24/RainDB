@@ -191,6 +191,7 @@ export default {
         .then(
           res => {
             console.log("success");
+            this.tableTitle = [];
             if (res.data.info.fushejiTable.length != 0) {
               // tableTitle
               Object.keys(res.data.info.fushejiTable[0]).forEach(val => {

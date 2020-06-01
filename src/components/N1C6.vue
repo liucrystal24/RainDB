@@ -555,6 +555,7 @@ export default {
       this.axios.get(url).then(
         res => {
           console.log("success");
+          this.tankongStationOption = [];
           // console.log(res.data);
           let stationarr = res.data.info.zidongStationNum;
           // console.log(stationarr);

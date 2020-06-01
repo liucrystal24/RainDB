@@ -10,7 +10,7 @@
         <el-col :span="18">
           <div class="titletext">条件筛选</div>
         </el-col>
-        <div class="datades">数据区间：2014.7.14~2019.5.28</div>
+        <div class="datades">数据区间：2014.5.10~2018.9.21</div>
       </el-row>
       <el-form ref="dateselect" :model="dateselect" label-width="30%">
         <el-form-item label="起始日期">
@@ -46,7 +46,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="searchleida">查询</el-button>
+          <el-button type="primary" @click="search">查询</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
@@ -168,16 +168,16 @@
 
 <script>
 export default {
-  name: "N1C1",
+  name: "N2C5",
   data() {
     return {
       dateselect: {
         startdate: "",
         starttime: "",
-        startdefaultdate: new Date(2014, 6, 14),
+        startdefaultdate: new Date(2014, 4, 10),
         enddate: "",
         endtime: "",
-        enddefaultdate: new Date(2014, 6, 14),
+        enddefaultdate: new Date(2014, 4, 11),
         stationid: ""
       },
       form: {
@@ -194,11 +194,11 @@ export default {
     };
   },
   methods: {
-    searchleida() {
+    search() {
       let starttime = this.format(this.dateselect.startdate);
       let endtime = this.format(this.dateselect.enddate);
       let stationid = this.dateselect.stationid;
-      let url = "/FJtankongSearch";
+      let url = "/SDtankongSearch";
       this.axios
         .get(url, {
           params: {
@@ -211,8 +211,17 @@ export default {
           res => {
             console.log("success");
             console.log(res.data);
-            // 探空数组
-            this.tableData = res.data.info.tankongsearch;
+            if (res.data.code == 0) {
+              this.$alert("此时间段没有数据", "提示", {
+                confirmButtonText: "确定",
+                callback: action => {
+                  console.log(action);
+                }
+              });
+            } else {
+              console.log(res.data);
+              this.tableData = res.data.info.table;
+            }
           },
           res => {
             console.log("err");
@@ -333,7 +342,7 @@ export default {
         const data = this.formatJson(filterVal, list);
         const tableLength = this.tableData.length;
         if (tableLength != 0) {
-          export_json_to_excel(tHeader, data, "福建探空数据");
+          export_json_to_excel(tHeader, data, "山东探空数据");
         } else {
           this.$alert("没有探空数据，请先查询", "提示", {
             confirmButtonText: "确定",
@@ -345,13 +354,13 @@ export default {
       });
     },
     findStationid() {
-      let url = "/FJtankongStationNum";
+      let url = "/SDtankongStationNum";
       this.axios.get(url).then(
         res => {
           console.log("success");
           this.tankongStationOption = [];
           // console.log(res.data);
-          let stationarr = res.data.info.tankongStationNum;
+          let stationarr = res.data.info.StationNum;
           // console.log(stationarr);
           stationarr.forEach((val, index) => {
             // console.log(val)
