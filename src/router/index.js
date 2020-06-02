@@ -33,12 +33,12 @@ import N2C7 from "@/components/N2C7";
 import N2C8 from "@/components/N2C8";
 
 // N3Cx 海南
-import N4C1 from "@/components/N4C1";
-import N4C2 from "@/components/N4C2";
-import N4C3 from "@/components/N4C3";
-import N4C4 from "@/components/N4C4";
-import N4C5 from "@/components/N4C5";
-import N4C6 from "@/components/N4C6";
+import N3C1 from "@/components/N3C1";
+import N3C2 from "@/components/N3C2";
+import N3C3 from "@/components/N3C3";
+import N3C4 from "@/components/N3C4";
+import N3C5 from "@/components/N3C5";
+import N3C6 from "@/components/N3C6";
 
 Vue.use(Router);
 
@@ -194,67 +194,45 @@ export default new Router({
           path: "n2c8",
           name: "n2c8",
           component: N2C8
+        },
+         // ---------海南----------
+         {
+          // 地图总览
+          path: "n3c1",
+          name: "n3c1",
+          component: N3C1
+        },
+        {
+          // 试验样本
+          path: "n3c2",
+          name: "n3c2",
+          component: N3C2
+        },
+        {
+          // FY4A
+          path: "n3c3",
+          name: "n3c3",
+          component: N3C3
+        },
+        {
+          // FY4A图片
+          path: "n3c4",
+          name: "n3c4",
+          component: N3C4
+        },
+        {
+          // 雷达
+          path: "n3c5",
+          name: "n3c5",
+          component: N3C5
+        },
+        {
+          // 雨量
+          path: "n3c6",
+          name: "n3c6",
+          component: N3C6
         }
       ]
     }
-    // {
-    //   path: "/nav2",
-    //   // name: 'Nav1',
-    //   component: Nav2,
-    //   children: [
-    //     {
-    //       path: "n2c1",
-    //       name: "n2c1",
-    //       component: N2C1
-    //     },
-    //     {
-    //       path: "n2c2",
-    //       name: "n2c2",
-    //       component: N2C2
-    //     },
-    //     {
-    //       path: "n2c3",
-    //       name: "n2c3",
-    //       component: N2C3
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: "/nav4",
-    //   // name: 'Nav1',
-    //   component: Nav4,
-    //   children: [
-    //     {
-    //       path: "n4c1",
-    //       name: "n4c1",
-    //       component: N4C1
-    //     },
-    //     {
-    //       path: "n4c2",
-    //       name: "n4c2",
-    //       component: N4C2
-    //     },
-    //     {
-    //       path: "n4c3",
-    //       name: "n4c3",
-    //       component: N4C3
-    //     },
-    //     {
-    //       path: "n4c4",
-    //       name: "n4c4",
-    //       component: N4C4
-    //     },
-    //     {
-    //       path: "n4c5",
-    //       name: "n4c5",
-    //       component: N4C5
-    //     },
-    //     {
-    //       path: "n4c6",
-    //       name: "n4c6",
-    //       component: N4C6
-    //     }
-    //   ]
-    // }
   ]
 });

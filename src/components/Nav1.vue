@@ -77,10 +77,12 @@
               <i class="el-icon-location navicon"></i>
               <span>海南省</span>
             </template>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
-            <el-menu-item index="2-3">选项3</el-menu-item>
-            <el-menu-item index="2-4">选项4</el-menu-item>
+            <el-menu-item index="n3c1">地图总览</el-menu-item>
+            <el-menu-item index="n3c2">试验样本</el-menu-item>
+            <el-menu-item index="n3c3">FY4A</el-menu-item>
+            <el-menu-item index="n3c4">FY4A图片</el-menu-item>
+            <el-menu-item index="n3c5">雷达</el-menu-item>
+            <el-menu-item index="n3c6">雨量</el-menu-item>
           </el-submenu>
         </el-menu>
 
