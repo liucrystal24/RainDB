@@ -446,11 +446,13 @@
         :current-page="currentPage"
         :hide-on-single-page="true"
       ></el-pagination>
+      <loadingWindow context="数据" v-show="loading"></loadingWindow>
     </div>
   </div>
 </template>
 
 <script>
+import loadingWindow from "./loading";
 export default {
   name: "N1C6",
   data() {
@@ -478,7 +480,8 @@ export default {
       zdFea: [],
       zdoptions: [],
       oldOptions: [[]],
-      zdTitle: []
+      zdTitle: [],
+      loading: false
     };
   },
   methods: {
@@ -495,6 +498,7 @@ export default {
       let zdFea = this.zdFea.toString();
       console.log(zdFea);
       let url = "/FJzidongSearch";
+      this.loading = true;
       this.axios
         .get(url, {
           params: {
@@ -509,6 +513,7 @@ export default {
             console.log("success");
             console.log(res.data);
             // 探空数组
+            this.loading = false;
             this.tableData = res.data.info.zidongsearch;
           },
           res => {
@@ -667,7 +672,8 @@ export default {
   mounted() {
     this.findStationid();
     this.findTitle();
-  }
+  },
+  components: { loadingWindow }
 };
 </script>
 

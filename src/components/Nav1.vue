@@ -10,8 +10,6 @@
         <el-menu
           :default-active="$route.path.split('nav1/')[1]"
           class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
           background-color="#6995EB"
           text-color="#fff"
           active-text-color="#ffd04b"
