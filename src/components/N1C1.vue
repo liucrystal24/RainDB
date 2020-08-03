@@ -133,13 +133,13 @@
     <bm-polyline :path="recPath5" stroke-color="#FF0000"></bm-polyline>
 
     <!-- 站点 -->
-    <bm-point-collection
+    <!-- <bm-point-collection
       :points="points"
       shape="BMAP_POINT_SHAPE_CIRCLE"
       color="red"
       size="BMAP_POINT_SIZE_SMALL"
       @click="clickHandler"
-    ></bm-point-collection>
+    ></bm-point-collection>-->
   </baidu-map>
 </template>
 
