@@ -14,14 +14,10 @@
       </el-row>
       <el-form ref="dateselect" :model="dateselect" label-width="30%">
         <el-form-item label="区域">
-          <el-select
-            v-model="dateselect.stationid"
-            placeholder="请选择区域"
-            @change="stationChange"
-          >
-            <el-option label="白城" value="白城"> </el-option>
-            <el-option label="长春" value="长春"> </el-option>
-            <el-option label="吉林" value="吉林"> </el-option>
+          <el-select v-model="dateselect.stationid" placeholder="请选择区域" @change="stationChange">
+            <el-option label="白城" value="白城"></el-option>
+            <el-option label="长春" value="长春"></el-option>
+            <el-option label="吉林" value="吉林"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="等级">
@@ -31,8 +27,7 @@
               :key="item.label"
               :label="item.label"
               :value="item.value"
-            >
-            </el-option>
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="日期">
@@ -42,17 +37,14 @@
               :key="item.label"
               :label="item.label"
               :value="item.value"
-            >
-            </el-option>
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="起始时间">
-          <el-time-picker v-model="dateselect.starttime" placeholder="选择时间">
-          </el-time-picker>
+          <el-time-picker v-model="dateselect.starttime" placeholder="选择时间"></el-time-picker>
         </el-form-item>
         <el-form-item label="结束时间">
-          <el-time-picker v-model="dateselect.endtime" placeholder="选择时间">
-          </el-time-picker>
+          <el-time-picker v-model="dateselect.endtime" placeholder="选择时间"></el-time-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="requestTable">查询</el-button>
@@ -70,9 +62,7 @@
         <el-col :span="20">
           <div class="titletext">辐射计数据</div>
           <div style="textAlign:right;paddingRight:100px;">
-            <el-button @click="export2Excel" type="primary" size="small"
-              >下载数据</el-button
-            >
+            <el-button @click="export2Excel" type="primary" size="small">下载数据</el-button>
           </div>
         </el-col>
       </el-row>
@@ -89,14 +79,12 @@
         >
           <el-table-column
             :label="item"
-            v-for="(item, index) in tableTitle"
+            v-for="(item) in tableTitle"
             :key="item"
             header-align="center"
             align="center"
           >
-            <template slot-scope="scope">
-              {{ scope.row[item] }}
-            </template>
+            <template slot-scope="scope">{{ scope.row[item] }}</template>
           </el-table-column>
         </el-table>
       </div>
@@ -274,13 +262,27 @@ export default {
     export2Excel() {
       require.ensure([], () => {
         const { export_json_to_excel } = require("../vendor/Export2Excel");
-        const tHeader = this.zdTitle;
-        const filterVal = this.zdTitle;
+        const tHeader = this.tableTitle;
+        const filterVal = this.tableTitle;
+        console.log(filterVal);
         const list = this.tableData;
+        console.log(list);
         const data = this.formatJson(filterVal, list);
+        // console.log(data);
         const tableLength = this.tableData.length;
+        let stationid = this.dateselect.stationid;
+        let level = this.dateselect.level;
+        let date = this.dateselect.date;
+        let starttime = date + " " + this.format(this.dateselect.starttime);
+        let endtime = date + " " + this.format(this.dateselect.endtime);
+        let download_title = `${stationid}_${level}_${date}`;
+        // console.log([stationid, level, date, starttime, endtime]);
         if (tableLength != 0) {
-          export_json_to_excel(tHeader, data, "福建自动站数据");
+          export_json_to_excel(
+            tHeader,
+            data,
+            "吉林_" + download_title + "_辐射计数据"
+          );
         } else {
           this.$alert("没有数据，请先查询", "提示", {
             confirmButtonText: "确定",
