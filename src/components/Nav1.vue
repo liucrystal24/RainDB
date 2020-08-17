@@ -30,7 +30,7 @@
               <i class="el-icon-location navicon"></i>
               <span>吉林省</span>
             </template>
-            <el-menu-item index="n0c1">地图总览</el-menu-item>
+            <el-menu-item index="n0c1">试验区域总览</el-menu-item>
             <el-menu-item index="n0c2">试验样本</el-menu-item>
             <el-menu-item index="n0c3">雨滴谱</el-menu-item>
             <el-menu-item index="n0c4">辐射计</el-menu-item>
@@ -44,7 +44,7 @@
               <i class="el-icon-location navicon"></i>
               <span>福建省</span>
             </template>
-            <el-menu-item index="n1c1">地图总览</el-menu-item>
+            <el-menu-item index="n1c1">试验区域总览</el-menu-item>
             <el-menu-item index="n1c2">试验样本</el-menu-item>
             <el-menu-item index="n1c3">探空</el-menu-item>
             <el-menu-item index="n1c4">雷达</el-menu-item>
@@ -58,7 +58,7 @@
               <i class="el-icon-location navicon"></i>
               <span>山东省</span>
             </template>
-            <el-menu-item index="n2c1">地图总览</el-menu-item>
+            <el-menu-item index="n2c1">试验区域总览</el-menu-item>
             <el-menu-item index="n2c2">试验样本</el-menu-item>
             <el-menu-item index="n2c31">雨量(常规)</el-menu-item>
             <el-menu-item index="n2c32">雨量(自动站)</el-menu-item>
@@ -75,7 +75,7 @@
               <i class="el-icon-location navicon"></i>
               <span>海南省</span>
             </template>
-            <el-menu-item index="n3c1">地图总览</el-menu-item>
+            <el-menu-item index="n3c1">试验区域总览</el-menu-item>
             <el-menu-item index="n3c2">试验样本</el-menu-item>
             <el-menu-item index="n3c3">FY4A</el-menu-item>
             <el-menu-item index="n3c4">FY4A图片</el-menu-item>

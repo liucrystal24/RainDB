@@ -110,7 +110,7 @@ export default {
         startdefaultdate: new Date(2015, 5, 6),
         enddate: "",
         endtime: "",
-        enddefaultdate: new Date(2015, 5, 7),
+        enddefaultdate: new Date(2017, 8, 1),
         stationid: ""
       },
       form: {

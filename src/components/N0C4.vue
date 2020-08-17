@@ -41,10 +41,18 @@
           </el-select>
         </el-form-item>
         <el-form-item label="起始时间">
-          <el-time-picker v-model="dateselect.starttime" placeholder="选择时间"></el-time-picker>
+          <el-time-picker
+            v-model="dateselect.starttime"
+            placeholder="选择时间"
+            :default-value="dateselect.startdefaultdate"
+          ></el-time-picker>
         </el-form-item>
         <el-form-item label="结束时间">
-          <el-time-picker v-model="dateselect.endtime" placeholder="选择时间"></el-time-picker>
+          <el-time-picker
+            v-model="dateselect.endtime"
+            placeholder="选择时间"
+            :default-value="dateselect.enddefaultdate"
+          ></el-time-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="requestTable">查询</el-button>
@@ -113,7 +121,9 @@ export default {
         level: "",
         date: "",
         starttime: "",
-        endtime: ""
+        endtime: "",
+        startdefaultdate: new Date(2016, 9, 10, 2, 40),
+        enddefaultdate: new Date(2016, 9, 10, 8, 40)
       },
       form: {
         stationnum: "",

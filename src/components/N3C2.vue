@@ -26,12 +26,19 @@
       </div>-->
       <div class="introDetail">
         <!-- <div class="introCity">海南：</div> -->
+       <ul class="introBig">
+          <li>随机类型：火箭增雨作业</li>
+          <li>样本时间：2014-2019</li>
+          <li>试验地点：海南乐东、海南屯昌</li>
+          <!-- <li>样本数：11、65</li> -->
+        </ul>
         <ul>
-          <li>1. 随机试验样本：目的：火箭增雨作业；时间：2014-2019；地点1：海南乐东，样本数：11；地点2：海南屯昌，样本数：65</li>
-          <li>2. FY4A：按datetime查询，如果band=V0001,则下载数据后缀为.NC，其他后缀均为.HDF，区间：20180527-20180528；</li>
-          <li>3. FY4A图片：按datetime查询，下载数据后缀为.jpg，区间：20180527-20180528；</li>
-          <li>4. 雷达：按datetime查询，下载数据后缀为.bin.bz2，区间：20140821-20180907；</li>
-          <li>5. 雨量：按观测时间 ObservTime、站点编码查询，区间：20140821-20180907</li>
+          <li class="introStyle">观测数据类型：</li>
+          <!-- <li>1. 随机试验样本：目的：火箭增雨作业；时间：2014-2019；地点1：海南乐东，样本数：11；地点2：海南屯昌，样本数：65</li> -->
+          <li>1. FY4A：按datetime查询，如果band=V0001,则下载数据后缀为.NC，其他后缀均为.HDF，区间：20180527-20180528；</li>
+          <li>2. FY4A图片：按datetime查询，下载数据后缀为.jpg，区间：20180527-20180528；</li>
+          <li>3. 雷达：按datetime查询，下载数据后缀为.bin.bz2，区间：20140821-20180907；</li>
+          <li>4. 雨量：按观测时间 ObservTime、站点编码查询，区间：20140821-20180907</li>
         </ul>
       </div>
       <!-- <div class="introDetail">
@@ -75,7 +82,7 @@ export default {
 }
 .intrContainer {
   width: 60%;
-  height: 335px;
+  height: 450px;
   /* padding-bottom: 50px; */
   border: 1px solid #000;
   background: rgba(240, 248, 255, 0.9);
@@ -102,6 +109,23 @@ export default {
   list-style: none;
   padding: 2px;
   padding-left: 30px;
+  font-size: 17px;
+}
+.introBig {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.introBig li {
+  list-style: none;
+  padding: 2px;
+  padding-left: 30px;
+  font-size: 19px;
+}
+.introStyle {
+  font-size: 19px !important;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 </style>
 

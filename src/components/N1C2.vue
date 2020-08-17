@@ -16,12 +16,18 @@
       </div>-->
       <div class="introDetail">
         <!-- <div class="introCity">福建：</div> -->
+        <ul class="introBig">
+          <li>随机类型：火箭增雨作业</li>
+          <li>样本时间：2014-2019</li>
+          <li>试验地点：福建古田</li>
+          <!-- <li>样本数：50</li> -->
+        </ul>
         <ul>
-          <li>1. 随机试验样本：目的：火箭增雨作业；时间：2014-2019；地点：福建古田；样本数：50</li>
-          <li>2. 雷达：按datetime查询，下载数据后缀为.bin.bz2，区间：20140714-20181116；</li>
-          <li>3. 探空：按datetime、站号查询，区间：20140714-20190528；</li>
-          <li>4. 雨滴谱：对应id分成10个表，按date、time查询，区间：20150409-20160309；</li>
-          <li>5. 自动站：按观测时间、区站号查询，区间：20140713-20181120</li>
+          <li class="introStyle">观测数据类型：</li>
+          <li>1. 雷达：按datetime查询，下载数据后缀为.bin.bz2，区间：20140714-20181116；</li>
+          <li>2. 探空：按datetime、站号查询，区间：20140714-20190528；</li>
+          <li>3. 雨滴谱：对应id分成10个表，按date、time查询，区间：20150409-20160309；</li>
+          <li>4. 自动站：按观测时间、区站号查询，区间：20140713-20181120</li>
         </ul>
       </div>
       <!-- <div class="introDetail">
@@ -75,7 +81,7 @@ export default {
 }
 .intrContainer {
   width: 60%;
-  height: 335px;
+  height: 400px;
   /* padding-bottom: 50px; */
   border: 1px solid #000;
   background: rgba(240, 248, 255, 0.9);
@@ -102,5 +108,22 @@ export default {
   list-style: none;
   padding: 2px;
   padding-left: 30px;
+  font-size: 17px;
+}
+.introBig {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.introBig li {
+  list-style: none;
+  padding: 2px;
+  padding-left: 30px;
+  font-size: 19px;
+}
+.introStyle {
+  font-size: 19px !important;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 </style>

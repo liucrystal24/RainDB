@@ -1,20 +1,20 @@
 <template>
   <div id="welcomeback">
     <div class="intrContainer">
-      <div class="introTitle">四省人工增雨随机试验数据库总览</div>
+      <div class="introTitle">数据库概述</div>
       <div class="introDetail">
-        <div class="introCity">山东：</div>
+        <!-- <div class="introCity">山东：</div> -->
         <ul>
-          <li>1. 随机试验样本：目的：火箭增雨作业；时间：2014-2019；地点：山东东平；样本数：61</li>
-          <li>2. 雨量：分为自动站雨量（yuliang_zidongzhan）和常规雨量数据，其中常规雨量数据按时间分表。2015年按station、time查询，其余时间在对应表中按站名查询，自动站按区站号、日期时间查询，区间：20140510-20180920（没有经纬度）</li>
-          <li>3. 雷达：按datetime查询，若id字段有值，下载数据后缀为.bin.bz2，若id字段无值，则下载数据命名为年+月+日+时.分V（例如：2015062900.03V），区间：20140510-20180920；</li>
-          <li>4. 探空：按datetime、站号查询，区间：20140510-20180921；</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;“人工增雨随机化试验样本数据库”由公益性行业（气象）科研专项“人工增雨随机化外场试验和效果检验技术研究（项目编号：GYHY201406033）”建设。</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项目承研单位是中国气象科学研究院，数据库目前收录了山东省人民政府人工影响天气办公室、福建省气象科学研究所、海南省气象科学研究所和吉林省人工影响天气办公室四个单位在人工增雨随机化外场试验中获得的数据资料，并根据个例进行观测资料分类入库。后续其它省份试验或新增加的试验个例可随时入库，形成全国人工增雨随机化外场试验数据库。</li>
+          <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户可根据增雨试验个例进行资料查询、下载，方便用户进行个例分析。</li>
+          <!-- <li>4. 探空：按datetime、站号查询，区间：20140510-20180921；</li>
           <li>5. 天气图：按datetime、地面\pressure查询，下载数据后缀为.png，区间：20140510-20180920；</li>
           <li>6. 雨量图：按date查询，下载数据后缀为.bmp，区间：20140510-20180920；</li>
-          <li>7. 卫星：按datetime查询，下载数据后缀为.Png，区间：20140510-20180920</li>
+          <li>7. 卫星：按datetime查询，下载数据后缀为.Png，区间：20140510-20180920</li>-->
         </ul>
       </div>
-      <div class="introDetail">
+      <!-- <div class="introDetail">
         <div class="introCity">福建：</div>
         <ul>
           <li>1. 随机试验样本：目的：火箭增雨作业；时间：2014-2019；地点：福建古田；样本数：50</li>
@@ -44,7 +44,7 @@
           <li>5. 雷达：按datetime查询，下载数据命名为年+月+日+时.分V（例如：2015062900.03V），区间：20150606-20180828；</li>
           <li>6. 自动站：按stationKey、obsTime查询，区间：20150606-20170828（没有经纬度）</li>
         </ul>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
@@ -60,7 +60,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #welcomeback {
   width: 100%;
   height: 100%;
@@ -75,21 +75,24 @@ export default {
 }
 .intrContainer {
   width: 80%;
-  height: 95%;
+  height: 400px;
   border: 1px solid #000;
   background: rgba(240, 248, 255, 0.9);
   /* background-color: aliceblue; */
   text-align: left;
   margin-left: 50%;
+  margin-top: 5%;
   transform: translateX(-50%);
   /* opacity: 0.8; */
   overflow: auto;
+  padding: 0 30px;
+  box-sizing: border-box;
 }
 .introTitle {
-  font-size: 25px;
+  font-size: 30px;
   font-weight: bolder;
   text-align: center;
-  padding: 5px;
+  padding: 20px;
 }
 .introCity {
   font-size: 20px;
@@ -98,8 +101,10 @@ export default {
   padding-left: 20px;
 }
 .introDetail li {
+  font-size: 19px;
+  line-height: 35px;
   list-style: none;
-  padding: 2px;
-  padding-left: 30px;
+  padding: 10px 0;
+  padding-left: 0px;
 }
 </style>

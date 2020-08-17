@@ -36,13 +36,19 @@
       </div>-->
       <div class="introDetail">
         <!-- <div class="introCity">吉林：</div> -->
+        <ul class="introBig">
+          <li>随机类型：飞机增雨作业</li>
+          <li>样本时间：2015-2017</li>
+          <li>试验地点：吉林中部</li>
+          <!-- <li>样本数：12</li> -->
+        </ul>
         <ul>
-          <li>1. 随机试验样本：目的：飞机增雨作业；时间：2015-2017；地点：吉林中部；样本数：12</li>
-          <li>2. 雨滴谱：对应id分成4个表，按传感器日期、传感器时间、station查询（没有经纬度），区间：20150606-20170827；</li>
-          <li>3. 辐射计：分白城、长春、吉林三个区域，其中吉林又分两个等级，再根据等级和日期分为6张表，一共8张表，按区域（白城、长春、吉林）、等级（lv1,lv2）、日期（只有吉林）、Date/Time查询，区间：20160524-20170827（没有经纬度）</li>
-          <li>4. 无人机：一个是单次飞行记录表，一个是统计表，由于数据量小，直接整张表列出，记录表下载数据后缀为doc，统计表下载数据后缀为.xlsx，区间：2015-2017；</li>
-          <li>5. 雷达：按datetime查询，下载数据命名为年+月+日+时.分V（例如：2015062900.03V），区间：20150606-20180828；</li>
-          <li>6. 自动站：按stationKey、obsTime查询，区间：20150606-20170828（没有经纬度）</li>
+          <li class="introStyle">观测数据类型：</li>
+          <li>1. 雨滴谱：对应id分成4个表，按传感器日期、传感器时间、station查询（没有经纬度），区间：20150606-20170827；</li>
+          <li>2. 辐射计：分白城、长春、吉林三个区域，其中吉林又分两个等级，再根据等级和日期分为6张表，一共8张表，按区域（白城、长春、吉林）、等级（lv1,lv2）、日期（只有吉林）、Date/Time查询，区间：20160524-20170827（没有经纬度）</li>
+          <li>3. 无人机：一个是单次飞行记录表，一个是统计表，由于数据量小，直接整张表列出，记录表下载数据后缀为doc，统计表下载数据后缀为.xlsx，区间：2015-2017；</li>
+          <li>4. 雷达：按datetime查询，下载数据命名为年+月+日+时.分V（例如：2015062900.03V），区间：20150606-20180828；</li>
+          <li>5. 自动站：按stationKey、obsTime查询，区间：20150606-20170828（没有经纬度）</li>
         </ul>
       </div>
     </div>
@@ -75,14 +81,15 @@ export default {
 }
 .intrContainer {
   width: 80%;
-  height: 335px;
+  height: 500px;
   /* padding-bottom: 50px; */
   border: 1px solid #000;
   background: rgba(240, 248, 255, 0.9);
   text-align: left;
   margin-left: 50%;
-  margin-top: 15%;
-  transform: translate(-50%, -50%);
+  /* margin-top: calc(50% - 500px); */
+  margin-top: 5%;
+  transform: translate(-50%, 0);
   /* transform: translateY(-50%); */
   overflow: auto;
 }
@@ -102,5 +109,22 @@ export default {
   list-style: none;
   padding: 2px;
   padding-left: 30px;
+  font-size: 17px;
+}
+.introBig {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.introBig li {
+  list-style: none;
+  padding: 2px;
+  padding-left: 30px;
+  font-size: 19px;
+}
+.introStyle {
+  font-size: 19px !important;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 </style>

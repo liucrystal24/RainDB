@@ -4,14 +4,20 @@
       <div class="introTitle">山东省试验样本</div>
       <div class="introDetail">
         <!-- <div class="introCity">山东：</div> -->
+        <ul class="introBig">
+          <li>随机类型：火箭增雨作业</li>
+          <li>样本时间：2014-2019</li>
+          <li>试验地点：山东东平</li>
+          <!-- <li>样本数：61</li> -->
+        </ul>
         <ul>
-          <li>1. 随机试验样本：目的：火箭增雨作业；时间：2014-2019；地点：山东东平；样本数：61</li>
-          <li>2. 雨量：分为自动站雨量（yuliang_zidongzhan）和常规雨量数据，其中常规雨量数据按时间分表。2015年按station、time查询，其余时间在对应表中按站名查询，自动站按区站号、日期时间查询，区间：20140510-20180920（没有经纬度）</li>
-          <li>3. 雷达：按datetime查询，若id字段有值，下载数据后缀为.bin.bz2，若id字段无值，则下载数据命名为年+月+日+时.分V（例如：2015062900.03V），区间：20140510-20180920；</li>
-          <li>4. 探空：按datetime、站号查询，区间：20140510-20180921；</li>
-          <li>5. 天气图：按datetime、地面\pressure查询，下载数据后缀为.png，区间：20140510-20180920；</li>
-          <li>6. 雨量图：按date查询，下载数据后缀为.bmp，区间：20140510-20180920；</li>
-          <li>7. 卫星：按datetime查询，下载数据后缀为.Png，区间：20140510-20180920</li>
+          <li class="introStyle">观测数据类型：</li>
+          <li>1. 雨量：分为自动站雨量（yuliang_zidongzhan）和常规雨量数据，其中常规雨量数据按时间分表。2015年按station、time查询，其余时间在对应表中按站名查询，自动站按区站号、日期时间查询，区间：20140510-20180920（没有经纬度）</li>
+          <li>2. 雷达：按datetime查询，若id字段有值，下载数据后缀为.bin.bz2，若id字段无值，则下载数据命名为年+月+日+时.分V（例如：2015062900.03V），区间：20140510-20180920；</li>
+          <li>3. 探空：按datetime、站号查询，区间：20140510-20180921；</li>
+          <li>4. 天气图：按datetime、地面\pressure查询，下载数据后缀为.png，区间：20140510-20180920；</li>
+          <li>5. 雨量图：按date查询，下载数据后缀为.bmp，区间：20140510-20180920；</li>
+          <li>6. 卫星：按datetime查询，下载数据后缀为.Png，区间：20140510-20180920</li>
         </ul>
       </div>
       <!-- <div class="introDetail">
@@ -75,7 +81,7 @@ export default {
 }
 .intrContainer {
   width: 80%;
-  height: 335px;
+  height: 500px;
   /* padding-bottom: 50px; */
   border: 1px solid #000;
   background: rgba(240, 248, 255, 0.9);
@@ -102,5 +108,22 @@ export default {
   list-style: none;
   padding: 2px;
   padding-left: 30px;
+  font-size: 17px;
+}
+.introBig {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.introBig li {
+  list-style: none;
+  padding: 2px;
+  padding-left: 30px;
+  font-size: 19px;
+}
+.introStyle {
+  font-size: 19px !important;
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 </style>
