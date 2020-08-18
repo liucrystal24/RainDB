@@ -27,7 +27,7 @@
       <div class="introDetail">
         <!-- <div class="introCity">海南：</div> -->
        <ul class="introBig">
-          <li>随机类型：火箭增雨作业</li>
+          <li>作业类型：火箭增雨作业</li>
           <li>样本时间：2014-2019</li>
           <li>试验地点：海南乐东、海南屯昌</li>
           <li>样本数：11、65</li>

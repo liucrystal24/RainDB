@@ -17,7 +17,7 @@
       <div class="introDetail">
         <!-- <div class="introCity">福建：</div> -->
         <ul class="introBig">
-          <li>随机类型：火箭增雨作业</li>
+          <li>作业类型：火箭增雨作业</li>
           <li>样本时间：2014-2019</li>
           <li>试验地点：福建古田</li>
           <li>样本数：50</li>
