@@ -75,7 +75,7 @@ export default {
 }
 .intrContainer {
   width: 80%;
-  height: 400px;
+  height: 450px;
   border: 1px solid #000;
   background: rgba(240, 248, 255, 0.9);
   /* background-color: aliceblue; */
@@ -89,7 +89,7 @@ export default {
   box-sizing: border-box;
 }
 .introTitle {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bolder;
   text-align: center;
   padding: 20px;
@@ -101,8 +101,9 @@ export default {
   padding-left: 20px;
 }
 .introDetail li {
-  font-size: 19px;
-  line-height: 35px;
+  font-size: 28px;
+  /* font-weight: bold; */
+  line-height: 40px;
   list-style: none;
   padding: 10px 0;
   padding-left: 0px;

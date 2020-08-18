@@ -37,10 +37,10 @@
       <div class="introDetail">
         <!-- <div class="introCity">吉林：</div> -->
         <ul class="introBig">
-          <li>随机类型：飞机增雨作业</li>
+          <li>作业类型：飞机增雨作业</li>
           <li>样本时间：2015-2017</li>
           <li>试验地点：吉林中部</li>
-          <!-- <li>样本数：12</li> -->
+          <li>样本数：12</li>
         </ul>
         <ul>
           <li class="introStyle">观测数据类型：</li>
@@ -81,7 +81,7 @@ export default {
 }
 .intrContainer {
   width: 80%;
-  height: 500px;
+  height: 550px;
   /* padding-bottom: 50px; */
   border: 1px solid #000;
   background: rgba(240, 248, 255, 0.9);
@@ -94,7 +94,7 @@ export default {
   overflow: auto;
 }
 .introTitle {
-  font-size: 25px;
+  font-size: 40px;
   font-weight: bolder;
   text-align: center;
   padding: 30px;
@@ -109,7 +109,7 @@ export default {
   list-style: none;
   padding: 2px;
   padding-left: 30px;
-  font-size: 17px;
+  font-size: 20px;
 }
 .introBig {
   font-size: 19px;
@@ -120,10 +120,10 @@ export default {
   list-style: none;
   padding: 2px;
   padding-left: 30px;
-  font-size: 19px;
+  font-size: 22px;
 }
 .introStyle {
-  font-size: 19px !important;
+  font-size: 22px !important;
   font-weight: 600;
   margin-bottom: 5px;
 }

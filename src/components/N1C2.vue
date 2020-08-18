@@ -20,7 +20,7 @@
           <li>随机类型：火箭增雨作业</li>
           <li>样本时间：2014-2019</li>
           <li>试验地点：福建古田</li>
-          <!-- <li>样本数：50</li> -->
+          <li>样本数：50</li>
         </ul>
         <ul>
           <li class="introStyle">观测数据类型：</li>
@@ -81,19 +81,19 @@ export default {
 }
 .intrContainer {
   width: 60%;
-  height: 400px;
+  height: 450px;
   /* padding-bottom: 50px; */
   border: 1px solid #000;
   background: rgba(240, 248, 255, 0.9);
   text-align: left;
   margin-left: 50%;
-  margin-top: 15%;
-  transform: translate(-50%, -50%);
+  margin-top: 5%;
+  transform: translate(-50%,0);
   /* transform: translateY(-50%); */
   overflow: auto;
 }
 .introTitle {
-  font-size: 25px;
+  font-size: 40px;
   font-weight: bolder;
   text-align: center;
   padding: 30px;
@@ -108,7 +108,7 @@ export default {
   list-style: none;
   padding: 2px;
   padding-left: 30px;
-  font-size: 17px;
+  font-size: 20px;
 }
 .introBig {
   font-size: 19px;
@@ -119,10 +119,10 @@ export default {
   list-style: none;
   padding: 2px;
   padding-left: 30px;
-  font-size: 19px;
+  font-size: 22px;
 }
 .introStyle {
-  font-size: 19px !important;
+  font-size: 22px !important;
   font-weight: 600;
   margin-bottom: 5px;
 }

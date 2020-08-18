@@ -117,7 +117,7 @@
       <button @click="toggle('polyline')">{{ polyline.editing ? '停止绘制' : '开始绘制' }}</button>
       <button>123</button>
     </bm-control>-->
-    <bm-boundary name="福建省" strokeWeight="5" strokeColor="#000000" fillOpacity="0"></bm-boundary>
+    <bm-boundary name="福建省" strokeWeight="3" strokeColor="#FF0000" fillOpacity="0"></bm-boundary>
     <!-- 画折线线查件组，只需要在polyline.paths加入经纬度数组，即可 -->
 
     <bm-polyline
@@ -149,7 +149,7 @@ export default {
   data() {
     return {
       center: { lng: 119.29035, lat: 26.1039 },
-      zoom: 9,
+      zoom: 20,
       mapStyle: {
         styleJson: [
           {
