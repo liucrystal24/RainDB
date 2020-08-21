@@ -38,12 +38,25 @@
 
     <!-- 站点 -->
     <!-- <bm-point-collection
-      :points="points"
+      :points="points1"
       shape="BMAP_POINT_SHAPE_CIRCLE"
-      color="red"
+      color="white"
       size="BMAP_POINT_SIZE_SMALL"
-      @click="clickHandler"
-    ></bm-point-collection>-->
+    ></bm-point-collection> -->
+
+    <!-- 站名 -->
+    <bm-label
+      :content="item.stationName"
+      v-for="item in points"
+      :key="'label' + item.ID"
+      :position="item.point"
+      :labelStyle="{
+        color: 'black',
+        fontSize: '13px',
+        border:'none',
+        backgroundColor: 'transparent',
+      }"
+    />
   </baidu-map>
 </template>
 
@@ -72,41 +85,42 @@ export default {
           }
         ]
       },
+      // 18.750076,109.173369
       recPath1: [
-        { lng: 115.300431, lat: 35.437025 },
-        { lng: 116.059319, lat: 35.966018 },
-        { lng: 116.160505, lat: 35.846273 },
-        { lng: 115.429212, lat: 35.354168 },
-        { lng: 115.300431, lat: 35.437025 }
+        { lng: 109.014587, lat: 18.92967 },
+        { lng: 109.377136, lat: 18.92967 },
+        { lng: 109.377136, lat: 18.648848 },
+        { lng: 109.014587, lat: 18.648848 },
+        { lng: 109.014587, lat: 18.92967 }
       ],
       recPath2: [
-        { lng: 116.25939, lat: 36.109843 },
-        { lng: 116.813609, lat: 36.204957 },
-        { lng: 116.903295, lat: 36.104244 },
-        { lng: 116.346777, lat: 35.954799 },
-        { lng: 116.25939, lat: 36.109843 }
+        { lng: 109.956665, lat: 19.432924 },
+        { lng: 110.272522, lat: 19.432924 },
+        { lng: 110.272522, lat: 19.204835 },
+        { lng: 109.956665, lat: 19.204835 },
+        { lng: 109.956665, lat: 19.432924 }
       ],
-      recPath3: [
-        { lng: 118.744392, lat: 26.337109 },
-        { lng: 118.969759, lat: 26.092324 },
-        { lng: 119.376799, lat: 26.446884 },
-        { lng: 119.128436, lat: 26.661986 },
-        { lng: 118.748991, lat: 26.339181 }
-      ],
-      recPath4: [
-        { lng: 118.433938, lat: 26.860179 },
-        { lng: 118.905368, lat: 26.357829 },
-        { lng: 119.080143, lat: 26.51932 },
-        { lng: 118.583416, lat: 26.985931 },
-        { lng: 118.436237, lat: 26.864304 }
-      ],
-      recPath5: [
-        { lng: 118.822581, lat: 26.948839 },
-        { lng: 119.041048, lat: 26.738414 },
-        { lng: 119.353803, lat: 27.027131 },
-        { lng: 119.112338, lat: 27.226732 },
-        { lng: 118.822581, lat: 26.948839 }
-      ],
+      // recPath3: [
+      //   { lng: 118.744392, lat: 26.337109 },
+      //   { lng: 118.969759, lat: 26.092324 },
+      //   { lng: 119.376799, lat: 26.446884 },
+      //   { lng: 119.128436, lat: 26.661986 },
+      //   { lng: 118.748991, lat: 26.339181 }
+      // ],
+      // recPath4: [
+      //   { lng: 118.433938, lat: 26.860179 },
+      //   { lng: 118.905368, lat: 26.357829 },
+      //   { lng: 119.080143, lat: 26.51932 },
+      //   { lng: 118.583416, lat: 26.985931 },
+      //   { lng: 118.436237, lat: 26.864304 }
+      // ],
+      // recPath5: [
+      //   { lng: 118.822581, lat: 26.948839 },
+      //   { lng: 119.041048, lat: 26.738414 },
+      //   { lng: 119.353803, lat: 27.027131 },
+      //   { lng: 119.112338, lat: 27.226732 },
+      //   { lng: 118.822581, lat: 26.948839 }
+      // ],
       polyline: {
         editing: false,
         paths: [
@@ -134,7 +148,14 @@ export default {
         show: false,
         fea: ""
       },
-      points: [],
+      points: [
+        {
+          stationName: "乐东县",
+          ID: "1",
+          point: { lng: 109.173369, lat: 18.78 }
+        }
+      ],
+      points1: [{ lng: 109.173369, lat: 18.78 }],
       chartShow: false,
       // SELECT `观测时间`,`10分钟平均风速` FROM `fujian`.`fujian_zidongzhan` WHERE `区站号` LIKE '%54537%' AND `观测时间` BETWEEN '2014-07-13 00:00:00' AND '2014-07-13 23:59:59' AND `2分钟平均风向` NOT LIKE '%/%'
       chartData: {
@@ -245,7 +266,8 @@ export default {
       this.center.lng = 110.03;
       this.center.lat = 19.33;
       this.zoom = 9;
-      // Map.addOverlay({ lng: 126.57, lat: 43.87 });
+      // 18.750076,109.173369
+      // Map.addOverlay({ lng: 109.173369, lat: 18.750076 });
       // const points = [];
       // let url = "/JLzidongStationNum";
       // // console.log(points);

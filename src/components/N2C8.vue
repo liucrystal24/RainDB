@@ -43,7 +43,7 @@
           </div>
         </el-col>
         <el-col :span="20">
-          <div class="titletext">天气图文件</div>
+          <div class="titletext">卫星图文件</div>
         </el-col>
       </el-row>
       <div class="tableContainer">
@@ -112,7 +112,7 @@
       v-show="picshow"
       :datetime="picdatetime"
       :fea="picfea"
-      context="天气图"
+      context="卫星图"
       :picsrc="picsrc"
       @closeWindow="closewindow"
     ></picWindow>
