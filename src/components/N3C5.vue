@@ -56,12 +56,7 @@
           "
           style="width: 100%;text-align:center"
         >
-          <el-table-column
-            label="日期"
-            header-align="center"
-            align="center"
-            width="180"
-          >
+          <el-table-column label="日期" header-align="center" align="center" width="180">
             <template slot-scope="scope">
               <i class="el-icon-time"></i>
               <span style="margin-left:10px">{{ scope.row.datetime }}</span>
@@ -83,8 +78,7 @@
                 size="mini"
                 type="primary"
                 @click="handleDownload(scope.$index, scope.row)"
-                >下载</el-button
-              >
+              >下载</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -155,6 +149,10 @@ export default {
             } else {
               console.log(res.data);
               this.tableData = res.data.info.table;
+              // 查看雷达重复情况
+              console.log(res.data.info.table);
+              let leiArr = this.leidaSet(res.data.info.table);
+              console.log(leiArr);
             }
           },
           res => {
@@ -198,7 +196,10 @@ export default {
           let datefirst = datetime.split(" ")[0];
           let datesecond = datetime.split(" ")[1].slice(0, 4);
           // console.log({ datefirst, datesecond });
-          link.setAttribute("download", datefirst + datesecond + '_'+ type + '_' + id +'.bin.bz2');
+          link.setAttribute(
+            "download",
+            datefirst + datesecond + "_" + type + "_" + id + ".bin.bz2"
+          );
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
@@ -241,6 +242,22 @@ export default {
         ":" +
         second
       );
+    },
+    leidaSet(arr) {
+      let index = 0;
+      let result = [];
+      let nameMap = {};
+
+      arr.forEach(v => {
+        let datetimeDay = v.datetime.split(" ")[0];
+        if (nameMap[datetimeDay] === void 0) {
+          result.push(datetimeDay);
+          nameMap[datetimeDay] = index;
+          index += 1;
+        }
+      });
+
+      return result;
     }
   },
   components: { loadingWindow }

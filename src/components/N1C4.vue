@@ -10,7 +10,7 @@
         <el-col :span="18">
           <div class="titletext">条件筛选</div>
         </el-col>
-        <div class="datades">数据区间：2014.7.14~2018.11.16</div>
+        <div class="datades">数据区间：2014.7.13~2018.11.16</div>
       </el-row>
       <el-form ref="dateselect" :model="dateselect" label-width="30%">
         <el-form-item label="起始日期">
@@ -81,12 +81,7 @@
           "
           style="width: 100%;text-align:center"
         >
-          <el-table-column
-            label="日期"
-            header-align="center"
-            align="center"
-            width="180"
-          >
+          <el-table-column label="日期" header-align="center" align="center" width="180">
             <template slot-scope="scope">
               <i class="el-icon-time"></i>
               <span style="margin-left:10px">{{ scope.row.datetime }}</span>
@@ -108,8 +103,7 @@
                 size="mini"
                 type="primary"
                 @click="handleDownload(scope.$index, scope.row)"
-                >下载</el-button
-              >
+              >下载</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -169,6 +163,10 @@ export default {
             console.log("success");
             console.log(res.data.info.leida);
             this.tableData = res.data.info.leida;
+            // 查看雷达重复情况
+            console.log(res.data.info.leida);
+            let leiArr = this.leidaSet(res.data.info.leida);
+            console.log(leiArr);
           },
           res => {
             console.log(res);
@@ -248,6 +246,22 @@ export default {
         ":" +
         second
       );
+    },
+    leidaSet(arr) {
+      let index = 0;
+      let result = [];
+      let nameMap = {};
+
+      arr.forEach(v => {
+        let datetimeDay = v.datetime.split(" ")[0];
+        if (nameMap[datetimeDay] === void 0) {
+          result.push(datetimeDay);
+          nameMap[datetimeDay] = index;
+          index += 1;
+        }
+      });
+
+      return result;
     }
   }
 };
